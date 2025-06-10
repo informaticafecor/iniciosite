@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FECCOR - Información para consultas y actividades</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header con imagen de edificio */
+        .header {
+            height: 50vh;
+            background: linear-gradient(135deg, rgba(30, 60, 120, 0.8), rgba(70, 130, 180, 0.6)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23f0f0f0" width="1200" height="400"/><rect fill="%23e0e0e0" x="100" y="50" width="1000" height="300"/><rect fill="%23d0d0d0" x="150" y="80" width="80" height="240"/><rect fill="%23d0d0d0" x="250" y="80" width="80" height="240"/><rect fill="%23d0d0d0" x="350" y="80" width="80" height="240"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .flags {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .flag {
+            width: 40px;
+            height: 25px;
+            border-radius: 3px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .flag.peru { background: linear-gradient(to right, #d91e18 33%, white 33%, white 66%, #d91e18 66%); }
+        .flag.other { background: linear-gradient(45deg, #4a90e2, #357abd); }
+
+        /* Main content con degradado suave */
+        .main-content {
+            background: linear-gradient(180deg, 
+                rgba(70, 130, 180, 0.1) 0%, 
+                rgba(135, 180, 220, 0.05) 50%, 
+                rgba(240, 248, 255, 0.8) 100%);
+            padding: 4rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 248, 255, 0.7));
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(70, 130, 180, 0.15);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(70, 130, 180, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(70, 130, 180, 0.25);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            color: #4682b4;
+            margin-bottom: 1rem;
+            filter: drop-shadow(2px 2px 4px rgba(70, 130, 180, 0.3));
+        }
+
+        .service-card h3 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Sección central con imagen */
+        .featured-section {
+            background: linear-gradient(135deg, rgba(240, 248, 255, 0.9), rgba(230, 240, 250, 0.8));
+            padding: 3rem 0;
+            margin: 3rem 0;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .featured-image {
+            max-width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(70, 130, 180, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        /* Video section */
+        .video-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 252, 255, 0.9));
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            box-shadow: 0 8px 25px rgba(70, 130, 180, 0.1);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Sections */
+        .info-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 248, 255, 0.7));
+            margin: 2rem 0;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(70, 130, 180, 0.1);
+            border-left: 5px solid #4682b4;
+        }
+
+        .info-section h2 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+            color: #4682b4;
+        }
+
+        /* Navigation */
+        .nav-sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.9));
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(70, 130, 180, 0.15);
+            max-width: 200px;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 0.5rem;
+            color: #4682b4;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-item:hover {
+            background: linear-gradient(135deg, rgba(70, 130, 180, 0.1), rgba(135, 180, 220, 0.05));
+            transform: translateX(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-sidebar {
+                display: none;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="flags">
+            <div class="flag peru"></div>
+            <div class="flag other"></div>
+        </div>
+        <div class="header-content">
+            <h1>Información para sus consultas y actividades del personal FECCOR</h1>
+        </div>
+    </header>
+
+    <!-- Navigation Sidebar -->
+    <nav class="nav-sidebar">
+        <a href="#inicio" class="nav-item">🏠 Inicio</a>
+        <a href="#normativa" class="nav-item">📋 Normativa y Guías</a>
+        <a href="#coordinaciones" class="nav-item">🤝 Coordinaciones</a>
+        <a href="#operativos" class="nav-item">⚖️ Operativos FECCOR</a>
+        <a href="#defensores" class="nav-item">🛡️ Defensores Públicos</a>
+        <a href="#competencias" class="nav-item">✅ Competencias</a>
+        <a href="#convocatorias" class="nav-item">👥 Convocatorias</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Services Grid -->
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Normativa y Guías Prácticas</h3>
+                    <p>Información relevante de la normativa vigente y las guías prácticas disponibles.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>Unidad de Pericias</h3>
+                    <p>Servicios especializados en análisis forense y peritaje criminal.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">✅</div>
+                    <h3>Competencias</h3>
+                    <p>Definición clara de competencias y ámbitos de actuación.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🤝</div>
+                    <h3>Coordinaciones Interinstitucionales</h3>
+                    <p>Relaciones entre Fiscalías de Crimen Organizado y cooperaciones internacionales.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3>Defensores Públicos</h3>
+                    <p>Servicios de defensa pública y asesoría legal especializada.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">👥</div>
+                    <h3>Convocatorias</h3>
+                    <p>Información sobre convocatorias y oportunidades profesionales.</p>
+                </div>
+            </div>
+
+            <!-- Featured Section -->
+            <section class="featured-section">
+                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'><rect fill='%23f8f9fa' width='800' height='300'/><rect fill='%234682b4' x='50' y='50' width='700' height='200' opacity='0.1'/><circle fill='%234682b4' cx='400' cy='150' r='50' opacity='0.3'/><text x='400' y='160' text-anchor='middle' fill='%234682b4' font-size='16'>Reunión FECCOR</text></svg>" alt="Reunión FECCOR" class="featured-image">
+            </section>
+
+            <!-- Video Section -->
+            <section class="video-section">
+                <h2>🎥 Operativo Amanecer Seguro</h2>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </section>
+
+            <!-- Information Sections -->
+            <section id="normativa" class="info-section">
+                <h2><span class="section-icon">📋</span> Normativa y Guías Prácticas</h2>
+                <p>Esta sección ofrece información relevante de la normativa vigente y las guías prácticas disponibles, con el objetivo de contribuir al desarrollo de una justicia penal más eficaz y equitativa.</p>
+            </section>
+
+            <section id="coordinaciones" class="info-section">
+                <h2><span class="section-icon">🤝</span> Coordinaciones Interinstitucionales</h2>
+                <p>Esta sección encontrarás contenido especializado sobre las complejas relaciones entre las Fiscalías de Crimen Organizado y cooperaciones interinstitucionales. A través de nuestros artículos, entrevistas y análisis, buscamos fomentar una mayor comprensión de los roles de cada institución y promover una colaboración más efectiva.</p>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
