@@ -195,35 +195,65 @@
                 transform: scale(1);
             }
         }
+
+        /* Indicador de carga */
+        .loading-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            color: white;
+            font-size: 18px;
+            flex-direction: column;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
     <div class="carousel-container">
-        <!-- Botón Saltar Intro -->
-        <a href="https://sites.google.com/view/tu-sitio-web" class="skip-intro-btn">Saltar Intro</a>
+        <!-- Botón Saltar Intro - CAMBIA ESTA URL -->
+        <a href="https://sites.google.com/view/TU-SITIO-AQUI" class="skip-intro-btn">Saltar Intro</a>
 
         <!-- Contador de slides -->
         <div class="slide-counter">
             <span id="currentSlide">1</span> / <span id="totalSlides">2</span>
         </div>
 
-        <!-- Slide 1: WhatsApp Image 2024-09-23 at 10.08.55 PM (4).jpeg -->
+        <!-- Slide 1: REEMPLAZA CON TU URL DE GITHUB -->
         <div class="carousel-slide active">
-            <img src="https://drive.google.com/file/d/1qDYq-esCfy3kWU9G8w8Q6s5bmv8JL5k6/view?usp=drive_link" 
-                 alt="Comunicado 1" class="slide-image">
+            <img src="https://raw.github.com/informaticafecor/iniciosite/blob/main/fo1.jpeg" 
+                 alt="Comunicado 1" class="slide-image"
+                 onload="this.style.display='block'"
+                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>❌ Error: No se pudo cargar la imagen<br><small>Verifica la URL de GitHub</small></div>'">
         </div>
 
-        <!-- Slide 2: WhatsApp Image 2024-09-23 at 10.08.41 PM.jpeg -->
+        <!-- Slide 2: REEMPLAZA CON TU URL DE GITHUB -->
         <div class="carousel-slide">
-            <img src="https://drive.google.com/file/d/1f_HfRAgAJFOscQRyITTzE682fXV4NrbD/view?usp=drive_link" 
-                 alt="Comunicado 2" class="slide-image">
+            <img src="https://raw.github.com/informaticafecor/iniciosite/blob/main/fo2.jpeg"
+                 alt="Comunicado 2" class="slide-image"
+                 onload="this.style.display='block'"
+                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>❌ Error: No se pudo cargar la imagen<br><small>Verifica la URL de GitHub</small></div>'">
         </div>
 
         <!-- Flechas de navegación -->
         <button class="nav-arrows nav-prev" onclick="previousSlide()">‹</button>
         <button class="nav-arrows nav-next" onclick="nextSlide()">›</button>
 
-        <!-- Indicadores (solo 2 porque tienes 2 imágenes) -->
+        <!-- Indicadores -->
         <div class="carousel-indicators">
             <div class="indicator active" onclick="currentSlideSet(1)"></div>
             <div class="indicator" onclick="currentSlideSet(2)"></div>
@@ -232,10 +262,15 @@
 
     <script>
         let slideIndex = 1;
-        const totalSlides = 2; // Tienes 2 imágenes
+        const totalSlides = 2;
         let autoSlideInterval;
 
-        // Actualizar contador total al cargar
+        // Mostrar indicadores de carga iniciales
+        document.querySelectorAll('.slide-image').forEach(img => {
+            img.style.display = 'none';
+            img.parentElement.innerHTML += '<div class="loading-placeholder"><div class="loading-spinner"></div>Cargando imagen...</div>';
+        });
+
         document.getElementById('totalSlides').textContent = totalSlides;
 
         function showSlide(n) {
@@ -245,15 +280,12 @@
             if (n > totalSlides) slideIndex = 1;
             if (n < 1) slideIndex = totalSlides;
             
-            // Ocultar todos los slides
             slides.forEach(slide => slide.classList.remove('active'));
             indicators.forEach(indicator => indicator.classList.remove('active'));
             
-            // Mostrar slide actual
             slides[slideIndex - 1].classList.add('active');
             indicators[slideIndex - 1].classList.add('active');
             
-            // Actualizar contador
             document.getElementById('currentSlide').textContent = slideIndex;
         }
 
@@ -282,13 +314,13 @@
 
         function resetAutoSlide() {
             clearInterval(autoSlideInterval);
-            autoSlideInterval = setInterval(autoSlide, 6000); // 6 segundos para dar tiempo a leer
+            autoSlideInterval = setInterval(autoSlide, 6000);
         }
 
         // Inicializar carrusel automático
         autoSlideInterval = setInterval(autoSlide, 6000);
 
-        // Pausar en hover (cuando pasan el mouse por encima)
+        // Pausar en hover
         document.querySelector('.carousel-container').addEventListener('mouseenter', () => {
             clearInterval(autoSlideInterval);
         });
@@ -302,22 +334,14 @@
             if (e.key === 'ArrowLeft') previousSlide();
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'Escape') {
-                // Opcional: saltar intro con ESC
-                window.location.href = 'https://sites.google.com/view/tu-sitio-web';
+                window.location.href = 'https://sites.google.com/view/TU-SITIO-AQUI';
             }
         });
 
-        // Precargar imágenes para mejor rendimiento
-        function preloadImages() {
-            const images = document.querySelectorAll('.slide-image');
-            images.forEach(img => {
-                const newImg = new Image();
-                newImg.src = img.src;
-            });
-        }
-
-        // Inicializar cuando cargue la página
-        window.addEventListener('load', preloadImages);
+        // Log para debugging
+        console.log('🚀 Carrusel iniciado');
+        console.log('📁 Recuerda usar URLs RAW de GitHub');
+        console.log('🔗 Formato: https://raw.githubusercontent.com/USUARIO/REPO/main/imagen.jpg');
     </script>
 </body>
 </html>
