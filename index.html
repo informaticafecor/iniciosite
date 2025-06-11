@@ -175,10 +175,10 @@
             display: grid;
             grid-template-areas: 
                 "left-modules video-center right-modules";
-            grid-template-columns: 280px 1fr 280px;
-            gap: 25px;
+            grid-template-columns: 250px 1fr 250px;
+            gap: 20px;
             padding: 40px 30px;
-            max-width: 1400px;
+            max-width: 1500px;
             margin: 0 auto;
             align-items: start;
         }
@@ -266,12 +266,12 @@
             background: linear-gradient(145deg, rgba(15, 44, 82, 0.95), rgba(0, 117, 191, 0.8));
             backdrop-filter: blur(20px);
             border-radius: 25px;
-            padding: 30px;
+            padding: 35px;
             border: 2px solid rgba(0, 204, 153, 0.3);
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
             position: relative;
             overflow: hidden;
-            max-width: 750px;
+            width: 100%;
             margin: 0 auto;
         }
 
@@ -301,7 +301,7 @@
         .video-carousel-container {
             position: relative;
             width: 100%;
-            height: 380px;
+            height: 400px;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
@@ -606,17 +606,18 @@
             }
 
             .video-center {
-                max-width: 100%;
+                width: 100%;
+                padding: 30px 25px;
             }
 
             .modules-left, .modules-right {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                 gap: 20px;
             }
 
             .additional-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
         }
 
@@ -734,15 +735,15 @@
         
         <!-- MÓDULOS IZQUIERDA -->
         <div class="modules-left animate-left">
-            <div class="module-card" onclick="window.open('https://sites.google.com/d/15Hao-T_MHJm9q1yxGiitFQ9h72Na0r3Q/p/1iFFvhQeQbOcqZdPC9D2fAUSYuT5vF7Ci/edit', '_blank')">
+            <div class="module-card" onclick="window.open('https://drive.google.com/drive/folders/ENLACE1', '_blank')">
                 <span class="module-icon">📋</span>
                 <div class="module-title">Normativa y Guías</div>
                 <div class="module-subtitle">Protocolos y normativas actualizadas</div>
             </div>
 
-            <div class="module-card" onclick="window.open('https://sites.google.com/d/15Hao-T_MHJm9q1yxGiitFQ9h72Na0r3Q/p/1EQ0Bfr6YfZUUDtBdpru9HNUIvrlIFQcm/edit', '_blank')">
+            <div class="module-card" onclick="window.open('https://drive.google.com/drive/folders/ENLACE2', '_blank')">
                 <span class="module-icon">🔍</span>
-                <div class="module-title">Unidad de Peritajes</div>
+                <div class="module-title">Unidad de Pericias</div>
                 <div class="module-subtitle">Análisis forense especializado</div>
             </div>
 
@@ -761,27 +762,30 @@
                 <!-- Video Slide 1 - YouTube Embed -->
                 <div class="video-slide active">
                     <iframe class="youtube-embed" 
-                            src="https://www.youtube.com/embed/2X3qPNuv4KM?rel=0&modestbranding=1" 
+                            src="https://www.youtube.com/embed/VIDEO_ID_1?rel=0&modestbranding=1&enablejsapi=1" 
                             title="Operativo Amanecer Seguro"
-                            allowfullscreen>
+                            allowfullscreen
+                            id="youtube-player-1">
                     </iframe>
                 </div>
 
                 <!-- Video Slide 2 - YouTube Embed -->
                 <div class="video-slide">
                     <iframe class="youtube-embed" 
-                            src="https://www.youtube.com/embed/AR8_NtofTy0?rel=0&modestbranding=1" 
+                            src="https://www.youtube.com/embed/VIDEO_ID_2?rel=0&modestbranding=1&enablejsapi=1" 
                             title="Captura en Lima"
-                            allowfullscreen>
+                            allowfullscreen
+                            id="youtube-player-2">
                     </iframe>
                 </div>
 
                 <!-- Video Slide 3 - YouTube Embed -->
                 <div class="video-slide">
                     <iframe class="youtube-embed" 
-                            src="https://www.youtube.com/embed/DLz_Hg5ZJsA?rel=0&modestbranding=1" 
+                            src="https://www.youtube.com/embed/VIDEO_ID_3?rel=0&modestbranding=1&enablejsapi=1" 
                             title="Coordinación Internacional"
-                            allowfullscreen>
+                            allowfullscreen
+                            id="youtube-player-3">
                     </iframe>
                 </div>
 
@@ -900,10 +904,12 @@
         // Auto-play del carrusel de imágenes cada 4 segundos
         setInterval(nextImageSlide, 4000);
 
-        // CARRUSEL DE VIDEOS
+        // CARRUSEL DE VIDEOS CON CONTROL INTELIGENTE
         let currentVideoIndex = 0;
         const videoSlides = document.querySelectorAll('.video-slide');
         const videoIndicators = document.querySelectorAll('.video-indicator');
+        let autoPlayInterval;
+        let isVideoPlaying = false;
 
         function showVideoSlide(index) {
             videoSlides.forEach((slide, i) => {
@@ -921,6 +927,9 @@
         }
 
         function changeVideoSlide(direction) {
+            // Solo cambiar si no hay video reproduciéndose
+            if (isVideoPlaying) return;
+            
             currentVideoIndex += direction;
             if (currentVideoIndex >= videoSlides.length) {
                 currentVideoIndex = 0;
@@ -931,14 +940,79 @@
         }
 
         function currentVideoSlide(index) {
+            // Solo cambiar si no hay video reproduciéndose
+            if (isVideoPlaying) return;
+            
             currentVideoIndex = index - 1;
             showVideoSlide(currentVideoIndex);
         }
 
-        // Auto-play del carrusel de videos cada 6 segundos
-        setInterval(() => {
-            changeVideoSlide(1);
-        }, 6000);
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(() => {
+                if (!isVideoPlaying) {
+                    changeVideoSlide(1);
+                }
+            }, 6000);
+        }
+
+        function stopAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+            }
+        }
+
+        // Detectar cuando se reproduce un video de YouTube
+        function setupVideoListeners() {
+            const iframes = document.querySelectorAll('.youtube-embed');
+            
+            iframes.forEach((iframe, index) => {
+                iframe.addEventListener('load', function() {
+                    // Usar postMessage para comunicarse con YouTube Player
+                    iframe.contentWindow.postMessage('{"event":"listening","id":' + index + '}', '*');
+                });
+            });
+        }
+
+        // Escuchar mensajes del reproductor de YouTube
+        window.addEventListener('message', function(event) {
+            if (event.origin !== 'https://www.youtube.com') return;
+            
+            try {
+                const data = JSON.parse(event.data);
+                if (data.event === 'video-progress') {
+                    if (data.info && data.info.playerState === 1) { // Reproduciendo
+                        isVideoPlaying = true;
+                        stopAutoPlay();
+                    } else if (data.info && (data.info.playerState === 2 || data.info.playerState === 0)) { // Pausado o terminado
+                        isVideoPlaying = false;
+                        startAutoPlay();
+                    }
+                }
+            } catch (e) {
+                // Ignore parsing errors
+            }
+        });
+
+        // Control manual mejorado
+        document.addEventListener('click', function(e) {
+            // Si se hace clic en un video, pausar auto-play temporalmente
+            if (e.target.classList.contains('youtube-embed') || e.target.closest('.video-slide')) {
+                isVideoPlaying = true;
+                stopAutoPlay();
+                
+                // Reanudar auto-play después de 30 segundos de inactividad
+                setTimeout(() => {
+                    if (isVideoPlaying) {
+                        isVideoPlaying = false;
+                        startAutoPlay();
+                    }
+                }, 30000);
+            }
+        });
+
+        // Inicializar auto-play
+        startAutoPlay();
+        setupVideoListeners();
 
         // ANIMACIONES AL SCROLL
         const observerOptions = {
