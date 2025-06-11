@@ -195,12 +195,22 @@
                 transform: scale(1);
             }
         }
+
+        /* Indicador de carga para imágenes */
+        .image-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            color: white;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
     <div class="carousel-container">
-        <!-- Botón Saltar Intro -->
-        <a href="https://sites.google.com/d/1Vld4JD6BtniM1g9RnkWx96oe1ocplssY/p/1eAf_aW-O2zVw97brn_T-lhkECZ-WiZ0T/edit" class="skip-intro-btn">Saltar Intro</a>
+        <!-- Botón Saltar Intro - CORRIGE ESTA URL -->
+        <a href="https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio" class="skip-intro-btn">Saltar Intro</a>
 
         <!-- Contador de slides -->
         <div class="slide-counter">
@@ -210,20 +220,22 @@
         <!-- Slide 1: WhatsApp Image 2024-09-23 at 10.08.55 PM (4).jpeg -->
         <div class="carousel-slide active">
             <img src="https://drive.google.com/uc?id=1qDYq-esCfy3kWU9G8w8Q6s5bmv8JL5k6" 
-                 alt="Comunicado 1" class="slide-image">
+                 alt="Comunicado 1" class="slide-image" 
+                 onerror="this.parentElement.innerHTML='<div class=image-loading>❌ Error: Imagen sin permisos públicos</div>'">
         </div>
 
         <!-- Slide 2: WhatsApp Image 2024-09-23 at 10.08.41 PM.jpeg -->
         <div class="carousel-slide">
             <img src="https://drive.google.com/uc?id=1f_HfRAgAJFOscQRyITTzE682fXV4NrbD" 
-                 alt="Comunicado 2" class="slide-image">
+                 alt="Comunicado 2" class="slide-image"
+                 onerror="this.parentElement.innerHTML='<div class=image-loading>❌ Error: Imagen sin permisos públicos</div>'">
         </div>
 
         <!-- Flechas de navegación -->
         <button class="nav-arrows nav-prev" onclick="previousSlide()">‹</button>
         <button class="nav-arrows nav-next" onclick="nextSlide()">›</button>
 
-        <!-- Indicadores (solo 2 porque tienes 2 imágenes) -->
+        <!-- Indicadores -->
         <div class="carousel-indicators">
             <div class="indicator active" onclick="currentSlideSet(1)"></div>
             <div class="indicator" onclick="currentSlideSet(2)"></div>
@@ -232,7 +244,7 @@
 
     <script>
         let slideIndex = 1;
-        const totalSlides = 2; // Tienes 2 imágenes
+        const totalSlides = 2;
         let autoSlideInterval;
 
         // Actualizar contador total al cargar
@@ -282,13 +294,13 @@
 
         function resetAutoSlide() {
             clearInterval(autoSlideInterval);
-            autoSlideInterval = setInterval(autoSlide, 6000); // 6 segundos para dar tiempo a leer
+            autoSlideInterval = setInterval(autoSlide, 6000);
         }
 
         // Inicializar carrusel automático
         autoSlideInterval = setInterval(autoSlide, 6000);
 
-        // Pausar en hover (cuando pasan el mouse por encima)
+        // Pausar en hover
         document.querySelector('.carousel-container').addEventListener('mouseenter', () => {
             clearInterval(autoSlideInterval);
         });
@@ -302,12 +314,12 @@
             if (e.key === 'ArrowLeft') previousSlide();
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'Escape') {
-                // Opcional: saltar intro con ESC
-                window.location.href = 'https://sites.google.com/view/tu-sitio-web';
+                // Corregir también esta URL
+                window.location.href = 'https://sites.google.com/view/TU-SITIO-AQUI';
             }
         });
 
-        // Precargar imágenes para mejor rendimiento
+        // Precargar imágenes
         function preloadImages() {
             const images = document.querySelectorAll('.slide-image');
             images.forEach(img => {
@@ -316,7 +328,6 @@
             });
         }
 
-        // Inicializar cuando cargue la página
         window.addEventListener('load', preloadImages);
     </script>
 </body>
