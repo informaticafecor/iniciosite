@@ -271,7 +271,7 @@
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
             position: relative;
             overflow: hidden;
-            max-width: 700px;
+            max-width: 750px;
             margin: 0 auto;
         }
 
@@ -301,7 +301,7 @@
         .video-carousel-container {
             position: relative;
             width: 100%;
-            height: 350px;
+            height: 380px;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
@@ -316,11 +316,8 @@
             opacity: 0;
             transform: translateX(100%);
             transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
         }
 
         .video-slide.active {
@@ -332,12 +329,27 @@
             transform: translateX(-100%);
         }
 
+        /* YouTube Embed Styling */
+        .youtube-embed {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+        }
+
+        /* Fallback for custom video content */
         .video-content {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             color: white;
             z-index: 2;
-            max-width: 500px;
             padding: 30px;
+            box-sizing: border-box;
         }
 
         .video-play-btn {
@@ -465,8 +477,8 @@
 
         .additional-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
 
         .additional-card {
@@ -722,7 +734,7 @@
         
         <!-- MÓDULOS IZQUIERDA -->
         <div class="modules-left animate-left">
-            <div class="module-card" onclick="window.open('https://sites.google.com/d/15Hao-T_MHJm9q1yxGiitFQ9h72Na0r3Q/p/1iFFvhQeQbOcqZdPC9D2fAUSYuT5vF7Ci/edit', '_blank')">
+            <div class="module-card" onclick="window.open('https://drive.google.com/drive/folders/ENLACE1', '_blank')">
                 <span class="module-icon">📋</span>
                 <div class="module-title">Normativa y Guías</div>
                 <div class="module-subtitle">Protocolos y normativas actualizadas</div>
@@ -746,43 +758,31 @@
             <h2 class="video-section-title">Videos Destacados</h2>
             
             <div class="video-carousel-container">
-                <!-- Video Slide 1 -->
-                <div class="video-slide active" onclick="window.open('https://www.youtube.com/watch?v=2X3qPNuv4KM', '_blank')">
-                    <div class="video-content">
-                        <div class="video-play-btn">
-                            <span class="play-icon">▶</span>
-                        </div>
-                        <div class="video-title">Operativo Amanecer Seguro</div>
-                        <div class="video-description">
-                            Resultados del operativo interinstitucional contra organizaciones criminales
-                        </div>
-                    </div>
+                <!-- Video Slide 1 - YouTube Embed -->
+                <div class="video-slide active">
+                    <iframe class="youtube-embed" 
+                            src="https://www.youtube.com/embed/VIDEO_ID_1?rel=0&modestbranding=1" 
+                            title="Operativo Amanecer Seguro"
+                            allowfullscreen>
+                    </iframe>
                 </div>
 
-                <!-- Video Slide 2 -->
-                <div class="video-slide active" onclick="window.open('https://www.youtube.com/watch?v=DLz_Hg5ZJsA', '_blank')">
-                    <div class="video-content">
-                        <div class="video-play-btn">
-                            <span class="play-icon">▶</span>
-                        </div>
-                        <div class="video-title">Captura en Lima</div>
-                        <div class="video-description">
-                            Fiscalía logra importante captura de líder criminal en operativo coordinado
-                        </div>
-                    </div>
+                <!-- Video Slide 2 - YouTube Embed -->
+                <div class="video-slide">
+                    <iframe class="youtube-embed" 
+                            src="https://www.youtube.com/embed/VIDEO_ID_2?rel=0&modestbranding=1" 
+                            title="Captura en Lima"
+                            allowfullscreen>
+                    </iframe>
                 </div>
 
-                <!-- Video Slide 3 -->
-                <div class="video-slide active" onclick="window.open('https://www.youtube.com/watch?v=c6P0InE3l7U', '_blank')">
-                    <div class="video-content">
-                        <div class="video-play-btn">
-                            <span class="play-icon">▶</span>
-                        </div>
-                        <div class="video-title">Coordinación Internacional</div>
-                        <div class="video-description">
-                            Cooperación internacional en casos de criminalidad transnacional
-                        </div>
-                    </div>
+                <!-- Video Slide 3 - YouTube Embed -->
+                <div class="video-slide">
+                    <iframe class="youtube-embed" 
+                            src="https://www.youtube.com/embed/VIDEO_ID_3?rel=0&modestbranding=1" 
+                            title="Coordinación Internacional"
+                            allowfullscreen>
+                    </iframe>
                 </div>
 
                 <!-- Controles de navegación -->
@@ -852,6 +852,22 @@
             <div class="additional-card" onclick="window.open('https://drive.google.com/drive/folders/ENLACE12', '_blank')">
                 <span class="module-icon">📊</span>
                 <h4>Boletines Estadísticos</h4>
+            </div>
+
+            <!-- NUEVOS MÓDULOS AGREGADOS -->
+            <div class="additional-card" onclick="window.open('https://drive.google.com/drive/folders/ENLACE13', '_blank')">
+                <span class="module-icon">🎓</span>
+                <h4>Capacitación</h4>
+            </div>
+
+            <div class="additional-card" onclick="window.open('https://drive.google.com/drive/folders/ENLACE14', '_blank')">
+                <span class="module-icon">📞</span>
+                <h4>Directorios de Contacto</h4>
+            </div>
+
+            <div class="additional-card" onclick="window.open('https://drive.google.com/drive/folders/ENLACE15', '_blank')">
+                <span class="module-icon">📰</span>
+                <h4>Revista de las Fiscalías de Crimen Organizado</h4>
             </div>
         </div>
     </div>
