@@ -3,25 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrusel Ministerio Público</title>
+    <title>Carrusel de Comunicados</title>
     <style>
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
             font-family: 'Arial', sans-serif;
-            overflow: hidden;
         }
 
         .carousel-container {
             position: relative;
-            width: 100vw;
+            width: 100%;
             height: 100vh;
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5aa0 100%);
             overflow: hidden;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5aa0 100%);
         }
 
         .carousel-slide {
@@ -36,6 +31,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            box-sizing: border-box;
         }
 
         .carousel-slide.active {
@@ -43,89 +39,84 @@
         }
 
         .slide-image {
-            max-width: 85%;
-            max-height: 85%;
+            max-width: 90%;
+            max-height: 90%;
             width: auto;
             height: auto;
             object-fit: contain;
-            border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             background: white;
-            border: 3px solid rgba(255, 255, 255, 0.1);
         }
 
         .skip-intro-btn {
             position: absolute;
             top: 30px;
             right: 30px;
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
-            border: none;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: #1e3a5f;
+            padding: 12px 24px;
+            border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 16px;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
             z-index: 100;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
         }
 
         .skip-intro-btn:hover {
-            background: linear-gradient(45deg, #f7931e, #ff6b35);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.6);
+            background: white;
+            border-color: #1e3a5f;
+            color: #1e3a5f;
             text-decoration: none;
-            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .nav-arrows {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.15);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
             color: white;
-            font-size: 28px;
-            width: 65px;
-            height: 65px;
+            font-size: 30px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
             z-index: 50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .nav-arrows:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.4);
             transform: translateY(-50%) scale(1.1);
         }
 
         .nav-prev {
-            left: 40px;
+            left: 30px;
         }
 
         .nav-next {
-            right: 40px;
+            right: 30px;
         }
 
         .carousel-indicators {
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 15px;
+            gap: 12px;
             z-index: 50;
         }
 
         .indicator {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.4);
             cursor: pointer;
@@ -135,43 +126,90 @@
 
         .indicator.active {
             background: white;
-            transform: scale(1.3);
+            transform: scale(1.2);
             border-color: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
         }
 
         .slide-counter {
             position: absolute;
             top: 30px;
             left: 30px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.6);
             color: white;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(30, 58, 95, 0.9);
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide-image {
+                max-width: 95%;
+                max-height: 85%;
+            }
+
+            .skip-intro-btn {
+                top: 15px;
+                right: 15px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .nav-arrows {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+
+            .nav-prev {
+                left: 15px;
+            }
+
+            .nav-next {
+                right: 15px;
+            }
+
+            .carousel-indicators {
+                bottom: 20px;
+            }
+
+            .slide-counter {
+                top: 15px;
+                left: 15px;
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+
+        /* Animación de carga */
+        .slide-image {
+            opacity: 0;
+            transform: scale(0.9);
+            animation: imageLoad 0.5s ease-out forwards;
+        }
+
+        @keyframes imageLoad {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Indicador de carga */
+        .loading-placeholder {
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 300px;
             color: white;
-            font-size: 20px;
-            z-index: 1000;
+            font-size: 18px;
+            flex-direction: column;
         }
 
         .loading-spinner {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border: 4px solid rgba(255, 255, 255, 0.3);
             border-top: 4px solid white;
             border-radius: 50%;
@@ -183,183 +221,57 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .slide-image {
-                max-width: 95%;
-                max-height: 80%;
-            }
-
-            .skip-intro-btn {
-                top: 20px;
-                right: 20px;
-                padding: 12px 24px;
-                font-size: 14px;
-            }
-
-            .nav-arrows {
-                width: 55px;
-                height: 55px;
-                font-size: 24px;
-            }
-
-            .nav-prev { left: 20px; }
-            .nav-next { right: 20px; }
-
-            .slide-counter {
-                top: 20px;
-                left: 20px;
-                padding: 10px 16px;
-                font-size: 14px;
-            }
-
-            .carousel-indicators { bottom: 25px; }
-        }
-
-        @media (max-width: 480px) {
-            .slide-image {
-                max-width: 98%;
-                max-height: 75%;
-            }
-
-            .nav-arrows {
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
-            }
-
-            .skip-intro-btn {
-                padding: 10px 20px;
-                font-size: 13px;
-            }
-        }
-
-        /* Animaciones mejoradas */
-        .slide-image {
-            animation: fadeInScale 0.8s ease-out;
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Efectos hover para indicadores */
-        .indicator:hover {
-            background: rgba(255, 255, 255, 0.7);
-            transform: scale(1.1);
-        }
     </style>
 </head>
 <body>
     <div class="carousel-container">
-        <!-- Overlay de carga inicial -->
-        <div class="loading-overlay" id="loadingOverlay">
-            <div style="text-align: center;">
-                <div class="loading-spinner"></div>
-                <div>Cargando comunicados...</div>
-            </div>
-        </div>
-
-        <!-- Botón Saltar Intro -->
+        <!-- Botón Saltar Intro - CAMBIA ESTA URL -->
         <a href="https://sites.google.com/view/TU-SITIO-AQUI" class="skip-intro-btn">Saltar Intro</a>
 
         <!-- Contador de slides -->
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">3</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">2</span>
         </div>
 
-        <!-- Slide 1 -->
+        <!-- Slide 1: REEMPLAZA CON TU URL DE GITHUB -->
         <div class="carousel-slide active">
-            <img src="./images/fo1.jpg" 
+            <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/refs/heads/main/fo1.jpeg" 
                  alt="Comunicado 1" class="slide-image"
-                 onload="imageLoaded(this)"
-                 onerror="imageError(this, 'comunicado1.jpg')">
+                 onload="this.style.display='block'"
+                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>❌ Error: No se pudo cargar la imagen<br><small>Verifica la URL de GitHub</small></div>'">
         </div>
 
-        <!-- Slide 2 -->
+        <!-- Slide 2: REEMPLAZA CON TU URL DE GITHUB -->
         <div class="carousel-slide">
-            <img src="./images/fo2.jpg" 
+            <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/main/fo2.jpeg" 
                  alt="Comunicado 2" class="slide-image"
-                 onload="imageLoaded(this)"
-                 onerror="imageError(this, 'comunicado2.jpg')">
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-slide">
-            <img src="./images/comunicado3.jpg" 
-                 alt="Comunicado 3" class="slide-image"
-                 onload="imageLoaded(this)"
-                 onerror="imageError(this, 'comunicado3.jpg')">
+                 onload="this.style.display='block'"
+                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>❌ Error: No se pudo cargar la imagen<br><small>Verifica la URL de GitHub</small></div>'">
         </div>
 
         <!-- Flechas de navegación -->
-        <button class="nav-arrows nav-prev" onclick="previousSlide()" title="Anterior">‹</button>
-        <button class="nav-arrows nav-next" onclick="nextSlide()" title="Siguiente">›</button>
+        <button class="nav-arrows nav-prev" onclick="previousSlide()">‹</button>
+        <button class="nav-arrows nav-next" onclick="nextSlide()">›</button>
 
         <!-- Indicadores -->
         <div class="carousel-indicators">
-            <div class="indicator active" onclick="currentSlideSet(1)" title="Comunicado 1"></div>
-            <div class="indicator" onclick="currentSlideSet(2)" title="Comunicado 2"></div>
-            <div class="indicator" onclick="currentSlideSet(3)" title="Comunicado 3"></div>
+            <div class="indicator active" onclick="currentSlideSet(1)"></div>
+            <div class="indicator" onclick="currentSlideSet(2)"></div>
         </div>
     </div>
 
     <script>
-        // Variables globales
         let slideIndex = 1;
-        const totalSlides = 3;
+        const totalSlides = 2;
         let autoSlideInterval;
-        let imagesLoaded = 0;
 
-        // Configuración
-        const config = {
-            autoSlideDelay: 7000, // 7 segundos
-            transitionDuration: 1000 // 1 segundo
-        };
+        // Mostrar indicadores de carga iniciales
+        document.querySelectorAll('.slide-image').forEach(img => {
+            img.style.display = 'none';
+            img.parentElement.innerHTML += '<div class="loading-placeholder"><div class="loading-spinner"></div>Cargando imagen...</div>';
+        });
 
-        // Inicialización
         document.getElementById('totalSlides').textContent = totalSlides;
-
-        function imageLoaded(img) {
-            imagesLoaded++;
-            console.log(`✅ Imagen cargada: ${img.alt} (${imagesLoaded}/${totalSlides})`);
-            
-            // Si todas las imágenes se cargaron, ocultar overlay
-            if (imagesLoaded >= totalSlides) {
-                setTimeout(() => {
-                    document.getElementById('loadingOverlay').style.display = 'none';
-                    console.log('🎉 Todas las imágenes cargadas');
-                }, 500);
-            }
-        }
-
-        function imageError(img, filename) {
-            console.error(`❌ Error cargando: ${filename}`);
-            img.parentElement.innerHTML = `
-                <div style="color: white; text-align: center; padding: 40px;">
-                    <h2>❌ Error</h2>
-                    <p>No se pudo cargar: <strong>${filename}</strong></p>
-                    <p style="font-size: 14px; margin-top: 20px;">
-                        Verifica que el archivo existe en la carpeta <code>images/</code>
-                    </p>
-                </div>
-            `;
-            imagesLoaded++;
-            
-            if (imagesLoaded >= totalSlides) {
-                setTimeout(() => {
-                    document.getElementById('loadingOverlay').style.display = 'none';
-                }, 500);
-            }
-        }
 
         function showSlide(n) {
             const slides = document.querySelectorAll('.carousel-slide');
@@ -368,18 +280,13 @@
             if (n > totalSlides) slideIndex = 1;
             if (n < 1) slideIndex = totalSlides;
             
-            // Remover clases activas
             slides.forEach(slide => slide.classList.remove('active'));
             indicators.forEach(indicator => indicator.classList.remove('active'));
             
-            // Activar slide e indicador actual
             slides[slideIndex - 1].classList.add('active');
             indicators[slideIndex - 1].classList.add('active');
             
-            // Actualizar contador
             document.getElementById('currentSlide').textContent = slideIndex;
-            
-            console.log(`📍 Mostrando slide ${slideIndex}`);
         }
 
         function nextSlide() {
@@ -407,84 +314,34 @@
 
         function resetAutoSlide() {
             clearInterval(autoSlideInterval);
-            autoSlideInterval = setInterval(autoSlide, config.autoSlideDelay);
+            autoSlideInterval = setInterval(autoSlide, 6000);
         }
 
-        // Inicializar carrusel automático después de que se carguen las imágenes
-        setTimeout(() => {
-            autoSlideInterval = setInterval(autoSlide, config.autoSlideDelay);
-            console.log('🔄 Auto-slide iniciado');
-        }, 2000);
+        // Inicializar carrusel automático
+        autoSlideInterval = setInterval(autoSlide, 6000);
 
-        // Control de pausa en hover
+        // Pausar en hover
         document.querySelector('.carousel-container').addEventListener('mouseenter', () => {
             clearInterval(autoSlideInterval);
-            console.log('⏸️ Auto-slide pausado');
         });
 
         document.querySelector('.carousel-container').addEventListener('mouseleave', () => {
             resetAutoSlide();
-            console.log('▶️ Auto-slide reanudado');
         });
 
         // Navegación con teclado
         document.addEventListener('keydown', (e) => {
-            switch(e.key) {
-                case 'ArrowLeft':
-                    previousSlide();
-                    break;
-                case 'ArrowRight':
-                    nextSlide();
-                    break;
-                case 'Escape':
-                    window.location.href = 'https://sites.google.com/view/TU-SITIO-AQUI';
-                    break;
-                case ' ': // Barra espaciadora
-                    e.preventDefault();
-                    nextSlide();
-                    break;
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'Escape') {
+                window.location.href = 'https://sites.google.com/view/TU-SITIO-AQUI';
             }
         });
 
-        // Soporte para gestos táctiles (móviles)
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-            
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    nextSlide(); // Swipe izquierda = siguiente
-                } else {
-                    previousSlide(); // Swipe derecha = anterior
-                }
-            }
-        }
-
-        // Log inicial
-        console.log('🚀 Carrusel Ministerio Público iniciado');
-        console.log('📁 Buscando imágenes en la carpeta ./images/');
-        console.log('⌨️ Controles: ← → ↑ ↓ Espacio Escape');
-        console.log('📱 Soporte táctil: Desliza para navegar');
-
-        // Ocultar overlay si tarda mucho en cargar
-        setTimeout(() => {
-            if (document.getElementById('loadingOverlay').style.display !== 'none') {
-                document.getElementById('loadingOverlay').style.display = 'none';
-                console.log('⏰ Timeout: Mostrando carrusel sin esperar más imágenes');
-            }
-        }, 10000); // 10 segundos máximo
+        // Log para debugging
+        console.log('🚀 Carrusel iniciado');
+        console.log('📁 Recuerda usar URLs RAW de GitHub');
+        console.log('🔗 Formato: https://raw.githubusercontent.com/USUARIO/REPO/main/imagen.jpg');
     </script>
 </body>
 </html>
