@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel de Comunicados</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5aa0 100%);
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .slide-image {
+            max-width: 90%;
+            max-height: 90%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: white;
+        }
+
+        .skip-intro-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: #1e3a5f;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .skip-intro-btn:hover {
+            background: white;
+            border-color: #1e3a5f;
+            color: #1e3a5f;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 50;
+        }
+
+        .nav-arrows:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-prev {
+            left: 30px;
+        }
+
+        .nav-next {
+            right: 30px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 50;
+        }
+
+        .indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .indicator.active {
+            background: white;
+            transform: scale(1.2);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .slide-counter {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide-image {
+                max-width: 95%;
+                max-height: 85%;
+            }
+
+            .skip-intro-btn {
+                top: 15px;
+                right: 15px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .nav-arrows {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+
+            .nav-prev {
+                left: 15px;
+            }
+
+            .nav-next {
+                right: 15px;
+            }
+
+            .carousel-indicators {
+                bottom: 20px;
+            }
+
+            .slide-counter {
+                top: 15px;
+                left: 15px;
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+
+        /* Animación de carga */
+        .slide-image {
+            opacity: 0;
+            transform: scale(0.9);
+            animation: imageLoad 0.5s ease-out forwards;
+        }
+
+        @keyframes imageLoad {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Botón Saltar Intro -->
+        <a href="https://sites.google.com/view/tu-sitio-web" class="skip-intro-btn">Saltar Intro</a>
+
+        <!-- Contador de slides -->
+        <div class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">3</span>
+        </div>
+
+        <!-- Slide 1 -->
+        <div class="carousel-slide active">
+            <img src="https://drive.google.com/drive/folders/1P76gvB4jBrh3S4TwWCpTYJgJ4ZrRQ5XG" 
+                 alt="Comunicado 1" class="slide-image">
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-slide">
+            <img src="https://via.placeholder.com/800x600/2d5aa0/ffffff?text=COMUNICADO+2" 
+                 alt="Comunicado 2" class="slide-image">
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-slide">
+            <img src="https://via.placeholder.com/800x600/1e3a5f/ffffff?text=COMUNICADO+3" 
+                 alt="Comunicado 3" class="slide-image">
+        </div>
+
+        <!-- Flechas de navegación -->
+        <button class="nav-arrows nav-prev" onclick="previousSlide()">‹</button>
+        <button class="nav-arrows nav-next" onclick="nextSlide()">›</button>
+
+        <!-- Indicadores -->
+        <div class="carousel-indicators">
+            <div class="indicator active" onclick="currentSlideSet(1)"></div>
+            <div class="indicator" onclick="currentSlideSet(2)"></div>
+            <div class="indicator" onclick="currentSlideSet(3)"></div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        const totalSlides = 3; // Cambia este número según cuántas imágenes tengas
+        let autoSlideInterval;
+
+        // Actualizar contador total al cargar
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            if (n > totalSlides) slideIndex = 1;
+            if (n < 1) slideIndex = totalSlides;
+            
+            // Ocultar todos los slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            // Mostrar slide actual
+            slides[slideIndex - 1].classList.add('active');
+            indicators[slideIndex - 1].classList.add('active');
+            
+            // Actualizar contador
+            document.getElementById('currentSlide').textContent = slideIndex;
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+            resetAutoSlide();
+        }
+
+        function previousSlide() {
+            slideIndex--;
+            showSlide(slideIndex);
+            resetAutoSlide();
+        }
+
+        function currentSlideSet(n) {
+            slideIndex = n;
+            showSlide(slideIndex);
+            resetAutoSlide();
+        }
+
+        function autoSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(autoSlide, 6000); // 6 segundos para dar tiempo a leer
+        }
+
+        // Inicializar carrusel automático
+        autoSlideInterval = setInterval(autoSlide, 6000);
+
+        // Pausar en hover (cuando pasan el mouse por encima)
+        document.querySelector('.carousel-container').addEventListener('mouseenter', () => {
+            clearInterval(autoSlideInterval);
+        });
+
+        document.querySelector('.carousel-container').addEventListener('mouseleave', () => {
+            resetAutoSlide();
+        });
+
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'Escape') {
+                // Opcional: saltar intro con ESC
+                window.location.href = 'https://sites.google.com/view/tu-sitio-web';
+            }
+        });
+
+        // Precargar imágenes para mejor rendimiento
+        function preloadImages() {
+            const images = document.querySelectorAll('.slide-image');
+            images.forEach(img => {
+                const newImg = new Image();
+                newImg.src = img.src;
+            });
+        }
+
+        // Inicializar cuando cargue la página
+        window.addEventListener('load', preloadImages);
+    </script>
+</body>
+</html>
