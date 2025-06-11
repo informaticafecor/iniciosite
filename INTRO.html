@@ -204,42 +204,35 @@
 
         <!-- Contador de slides -->
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">3</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">2</span>
         </div>
 
-        <!-- Slide 1 -->
+        <!-- Slide 1: WhatsApp Image 2024-09-23 at 10.08.55 PM (4).jpeg -->
         <div class="carousel-slide active">
-            <img src="https://drive.google.com/drive/folders/1P76gvB4jBrh3S4TwWCpTYJgJ4ZrRQ5XG" 
+            <img src="https://drive.google.com/uc?id=1DhdtbVXLj26Ik2H7OLvjfCicXJofZF8t" 
                  alt="Comunicado 1" class="slide-image">
         </div>
 
-        <!-- Slide 2 -->
+        <!-- Slide 2: WhatsApp Image 2024-09-23 at 10.08.41 PM.jpeg -->
         <div class="carousel-slide">
-            <img src="https://via.placeholder.com/800x600/2d5aa0/ffffff?text=COMUNICADO+2" 
+            <img src="https://drive.google.com/uc?id=1Q5mCBSrU9TpXaz-sWWK7nQU997oIhL_s" 
                  alt="Comunicado 2" class="slide-image">
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-slide">
-            <img src="https://via.placeholder.com/800x600/1e3a5f/ffffff?text=COMUNICADO+3" 
-                 alt="Comunicado 3" class="slide-image">
         </div>
 
         <!-- Flechas de navegación -->
         <button class="nav-arrows nav-prev" onclick="previousSlide()">‹</button>
         <button class="nav-arrows nav-next" onclick="nextSlide()">›</button>
 
-        <!-- Indicadores -->
+        <!-- Indicadores (solo 2 porque tienes 2 imágenes) -->
         <div class="carousel-indicators">
             <div class="indicator active" onclick="currentSlideSet(1)"></div>
             <div class="indicator" onclick="currentSlideSet(2)"></div>
-            <div class="indicator" onclick="currentSlideSet(3)"></div>
         </div>
     </div>
 
     <script>
         let slideIndex = 1;
-        const totalSlides = 3; // Cambia este número según cuántas imágenes tengas
+        const totalSlides = 2; // Tienes 2 imágenes
         let autoSlideInterval;
 
         // Actualizar contador total al cargar
