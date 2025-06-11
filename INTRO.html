@@ -236,25 +236,16 @@
         <!-- Slide 1: REEMPLAZA CON TU URL DE GITHUB -->
         <div class="carousel-slide active">
             <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/refs/heads/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
-                 alt="Comunicado 1" class="slide-image"
-                 onload="imageLoaded(this)"
-                 onerror="imageError(this, 'comunicado1.jpg')">
+    
+                 onload="this.style.display='block'"
+                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner>'">
         </div>
 
         <!-- Slide 2: REEMPLAZA CON TU URL DE GITHUB -->
         <div class="carousel-slide">
             <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/refs/heads/main/fo1.jpeg" 
-                 alt="Comunicado 2" class="slide-image"
-                 onload="imageLoaded(this)"
-                 onerror="imageError(this, 'comunicado2.jpg')">
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-slide">
-            <img src="./images/comunicado3.jpg" 
-                 alt="Comunicado 3" class="slide-image"
-                 onload="imageLoaded(this)"
-                 onerror="imageError(this, 'comunicado3.jpg')">
+                 onload="this.style.display='block'"
+                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner>'">
         </div>
 
         <!-- Flechas de navegación -->
