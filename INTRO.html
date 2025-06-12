@@ -226,7 +226,6 @@
         }
     </style>
 </head>
-
 <!-- Carrusel con eventos inline - Más compatible con Google Sites -->
 <div id="carousel-container" style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
     
@@ -298,14 +297,14 @@
 
 <script>
 // Variables globales accesibles desde onclick
-let currentSlideIndex = 1;
-const totalSlidesCount = 3;
-let autoSlideTimer = null;
+window.currentSlideIndex = 1;
+window.totalSlidesCount = 3;
+window.autoSlideTimer = null;
 
 console.log('🚀 Iniciando carrusel con eventos inline...');
 
 // Función para mostrar slide específico
-function showSlide(slideNumber) {
+window.showSlide = function(slideNumber) {
     console.log(`📸 Mostrando slide ${slideNumber}`);
     
     // Ocultar todos los slides
@@ -342,53 +341,53 @@ function showSlide(slideNumber) {
         counterElement.textContent = slideNumber;
     }
     
-    currentSlideIndex = slideNumber;
+    window.currentSlideIndex = slideNumber;
 }
 
 // Función para ir al siguiente slide
-function nextSlide() {
+window.nextSlide = function() {
     console.log('➡️ Siguiente slide');
-    let nextIndex = currentSlideIndex + 1;
-    if(nextIndex > totalSlidesCount) {
+    let nextIndex = window.currentSlideIndex + 1;
+    if(nextIndex > window.totalSlidesCount) {
         nextIndex = 1;
     }
-    showSlide(nextIndex);
-    resetAutoSlide();
+    window.showSlide(nextIndex);
+    window.resetAutoSlide();
 }
 
 // Función para ir al slide anterior
-function previousSlide() {
+window.previousSlide = function() {
     console.log('⬅️ Slide anterior');
-    let prevIndex = currentSlideIndex - 1;
+    let prevIndex = window.currentSlideIndex - 1;
     if(prevIndex < 1) {
-        prevIndex = totalSlidesCount;
+        prevIndex = window.totalSlidesCount;
     }
-    showSlide(prevIndex);
-    resetAutoSlide();
+    window.showSlide(prevIndex);
+    window.resetAutoSlide();
 }
 
 // Función para ir a slide específico
-function goToSlide(slideNumber) {
+window.goToSlide = function(slideNumber) {
     console.log(`🎯 Ir a slide ${slideNumber}`);
-    showSlide(slideNumber);
-    resetAutoSlide();
+    window.showSlide(slideNumber);
+    window.resetAutoSlide();
 }
 
 // Auto-slide
-function autoSlide() {
-    nextSlide();
+window.autoSlide = function() {
+    window.nextSlide();
 }
 
-function resetAutoSlide() {
-    if(autoSlideTimer) {
-        clearInterval(autoSlideTimer);
+window.resetAutoSlide = function() {
+    if(window.autoSlideTimer) {
+        clearInterval(window.autoSlideTimer);
     }
-    autoSlideTimer = setInterval(autoSlide, 6000);
+    window.autoSlideTimer = setInterval(window.autoSlide, 6000);
     console.log('🔄 Auto-slide reiniciado');
 }
 
 // Función de redirección (backup)
-function redirectToMainSite() {
+window.redirectToMainSite = function() {
     const url = 'https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio';
     console.log('🔗 Redirigiendo a:', url);
     window.open(url, '_blank');
@@ -398,25 +397,25 @@ function redirectToMainSite() {
 document.addEventListener('keydown', function(e) {
     switch(e.key) {
         case 'ArrowLeft':
-            previousSlide();
+            window.previousSlide();
             break;
         case 'ArrowRight':
-            nextSlide();
+            window.nextSlide();
             break;
         case 'Escape':
         case 'Enter':
         case ' ':
             e.preventDefault();
-            redirectToMainSite();
+            window.redirectToMainSite();
             break;
         case '1':
-            goToSlide(1);
+            window.goToSlide(1);
             break;
         case '2':
-            goToSlide(2);
+            window.goToSlide(2);
             break;
         case '3':
-            goToSlide(3);
+            window.goToSlide(3);
             break;
     }
 });
@@ -425,14 +424,14 @@ document.addEventListener('keydown', function(e) {
 const carouselContainer = document.getElementById('carousel-container');
 if(carouselContainer) {
     carouselContainer.addEventListener('mouseenter', function() {
-        if(autoSlideTimer) {
-            clearInterval(autoSlideTimer);
+        if(window.autoSlideTimer) {
+            clearInterval(window.autoSlideTimer);
         }
         console.log('⏸️ Auto-slide pausado');
     });
     
     carouselContainer.addEventListener('mouseleave', function() {
-        resetAutoSlide();
+        window.resetAutoSlide();
         console.log('▶️ Auto-slide reanudado');
     });
 }
@@ -440,14 +439,20 @@ if(carouselContainer) {
 // Inicialización
 function initCarousel() {
     console.log('🎯 Inicializando carrusel...');
-    showSlide(1);
-    resetAutoSlide();
+    window.showSlide(1);
+    window.resetAutoSlide();
     console.log('✅ Carrusel iniciado exitosamente');
     console.log('📋 Controles disponibles:');
     console.log('  • Flechas ← → para navegar');
     console.log('  • Círculos para ir a slide específico');
     console.log('  • Botón "Saltar Intro" para ir al sitio');
     console.log('  • Teclado: ← → 1 2 3 Enter Escape Espacio');
+    
+    // Test de funciones
+    console.log('🧪 Probando funciones...');
+    console.log('window.nextSlide disponible:', typeof window.nextSlide);
+    console.log('window.previousSlide disponible:', typeof window.previousSlide);
+    console.log('window.goToSlide disponible:', typeof window.goToSlide);
 }
 
 // Iniciar cuando esté listo
@@ -459,10 +464,9 @@ if(document.readyState === 'loading') {
 
 // Test de funciones (para debugging)
 console.log('🧪 Funciones disponibles globalmente:');
-console.log('  • nextSlide()');
-console.log('  • previousSlide()');
-console.log('  • goToSlide(1), goToSlide(2), goToSlide(3)');
-console.log('  • showSlide(número)');
+console.log('  • window.nextSlide()');
+console.log('  • window.previousSlide()');
+console.log('  • window.goToSlide(1), window.goToSlide(2), window.goToSlide(3)');
+console.log('  • window.showSlide(número)');
 </script>
-
 </html>
