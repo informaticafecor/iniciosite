@@ -228,7 +228,7 @@
 </head>
 <body>
     <div class="carousel-container">
-        <!-- Botón Saltar Intro con múltiples métodos de redirección -->
+        <!-- Botón Saltar Intro -->
         <button class="skip-intro-btn" onclick="goToMainSite()" title="Ir al sitio principal del Ministerio Público">
             Saltar Intro
         </button>
@@ -238,32 +238,32 @@
             <span id="currentSlide">1</span> / <span id="totalSlides">3</span>
         </div>
 
-        <!-- Slide 1 -->
+        <!-- Slide 1 - SOLO ESTE TIENE active -->
         <div class="carousel-slide active">
-            <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/refs/heads/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
+            <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
                  alt="Comunicado 1" class="slide-image"
                  onload="this.style.display='block'"
-                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen</div>'">
+                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen 1</div>'">
         </div>
 
         <!-- Slide 2 -->
         <div class="carousel-slide">
-            <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/refs/heads/main/fo1.jpeg" 
+            <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/main/fo1.jpeg" 
                  alt="Comunicado 2" class="slide-image"
                  onload="this.style.display='block'"
-                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen</div>'">
+                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen 2</div>'">
         </div>
 
+        <!-- Slide 3 -->
         <div class="carousel-slide">
-            <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/refs/heads/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
+            <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
                  alt="Comunicado 3" class="slide-image"
                  onload="this.style.display='block'"
-                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen</div>'">
+                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen 3</div>'">
         </div>
 
-        <!-- Flechas de navegación -->
+        <!-- Flechas de navegación - SIN DUPLICADOS -->
         <button class="nav-arrows nav-prev" onclick="previousSlide()">‹</button>
-        <button class="nav-arrows nav-next" onclick="nextSlide()">›</button>
         <button class="nav-arrows nav-next" onclick="nextSlide()">›</button>
 
         <!-- Indicadores -->
@@ -276,25 +276,36 @@
 
     <script>
         let slideIndex = 1;
-        const totalSlides = 3; // para agregar mas imagenes..
+        const totalSlides = 3;
         let autoSlideInterval;
 
+        // Actualizar contador
         document.getElementById('totalSlides').textContent = totalSlides;
 
         function showSlide(n) {
             const slides = document.querySelectorAll('.carousel-slide');
             const indicators = document.querySelectorAll('.indicator');
             
+            // Manejo circular de slides
             if (n > totalSlides) slideIndex = 1;
             if (n < 1) slideIndex = totalSlides;
             
+            // Remover todas las clases active
             slides.forEach(slide => slide.classList.remove('active'));
             indicators.forEach(indicator => indicator.classList.remove('active'));
             
-            slides[slideIndex - 1].classList.add('active');
-            indicators[slideIndex - 1].classList.add('active');
+            // Activar slide e indicador actual
+            if (slides[slideIndex - 1]) {
+                slides[slideIndex - 1].classList.add('active');
+            }
+            if (indicators[slideIndex - 1]) {
+                indicators[slideIndex - 1].classList.add('active');
+            }
             
+            // Actualizar contador
             document.getElementById('currentSlide').textContent = slideIndex;
+            
+            console.log(`📸 Mostrando slide ${slideIndex} de ${totalSlides}`);
         }
 
         function nextSlide() {
@@ -325,80 +336,60 @@
             autoSlideInterval = setInterval(autoSlide, 6000);
         }
 
-        // Inicializar carrusel automático
-        autoSlideInterval = setInterval(autoSlide, 6000);
-
-        // ✅ URL del sitio principal del Ministerio Público
+        // URL del sitio principal
         const MAIN_SITE_URL = 'https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio';
 
-        // 🎯 Función de redirección que funciona (basada en las pruebas exitosas)
         function goToMainSite() {
             console.log('🔄 Redirigiendo al sitio principal:', MAIN_SITE_URL);
-            
-            try {
-                // Método 1: window.location.href (más compatible)
-                window.location.href = MAIN_SITE_URL;
-            } catch (error) {
-                console.warn('⚠️ Método 1 falló, probando método 2...');
-                try {
-                    // Método 2: window.location.replace (alternativo)
-                    window.location.replace(MAIN_SITE_URL);
-                } catch (error2) {
-                    console.warn('⚠️ Método 2 falló, probando método 3...');
-                    try {
-                        // Método 3: window.open en misma pestaña
-                        window.open(MAIN_SITE_URL, '_self');
-                    } catch (error3) {
-                        console.error('❌ Todos los métodos fallaron:', error3);
-                        // Método 4: Enlace de emergencia
-                        const link = document.createElement('a');
-                        link.href = MAIN_SITE_URL;
-                        link.click();
-                    }
-                }
-            }
-        }
-
-        // 🔄 Función de redirección rápida (método directo)
-        function goToMainSiteFast() {
             window.location.href = MAIN_SITE_URL;
         }
 
-        // Pausar en hover
+        // Inicializar carrusel
+        function initCarousel() {
+            console.log('🚀 Iniciando carrusel...');
+            showSlide(1); // Asegurar que empiece en slide 1
+            autoSlideInterval = setInterval(autoSlide, 6000);
+            console.log('✅ Carrusel iniciado con', totalSlides, 'slides');
+        }
+
+        // Eventos de mouse
         document.querySelector('.carousel-container').addEventListener('mouseenter', () => {
             clearInterval(autoSlideInterval);
+            console.log('⏸️ Carrusel pausado (mouse encima)');
         });
 
         document.querySelector('.carousel-container').addEventListener('mouseleave', () => {
             resetAutoSlide();
+            console.log('▶️ Carrusel reanudado');
         });
 
-        // Navegación con teclado (múltiples teclas para redirección)
+        // Navegación con teclado
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') previousSlide();
-            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
             if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
-                if (e.key === ' ') e.preventDefault(); // Evitar scroll con espacio
+                if (e.key === ' ') e.preventDefault();
                 goToMainSite();
             }
-            // Atajos numéricos
             if (e.key === '1') currentSlideSet(1);
             if (e.key === '2') currentSlideSet(2);
+            if (e.key === '3') currentSlideSet(3);
         });
 
-        // Log para debugging
-        console.log('🚀 Carrusel del Ministerio Público iniciado');
-        console.log('🔗 Sitio principal configurado:', MAIN_SITE_URL);
-        console.log('⌨️ Controles disponibles:');
-        console.log('   • ← → : Navegar slides');
-        console.log('   • 1, 2 : Ir a slide específico');
-        console.log('   • Escape, Enter, Espacio : Ir al sitio principal');
-        console.log('📁 Imágenes de GitHub configuradas');
-        
-        // Verificación de conectividad (silenciosa)
-        setTimeout(() => {
-            console.log('🔍 Verificando conectividad...');
-        }, 2000);
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', initCarousel);
+
+        // Información de debugging
+        console.log('🎯 Carrusel del Ministerio Público cargado');
+        console.log('📊 Configuración:', {
+            totalSlides: totalSlides,
+            autoSlideInterval: '6 segundos',
+            sitePrincipal: MAIN_SITE_URL
+        });
     </script>
 </body>
 </html>
