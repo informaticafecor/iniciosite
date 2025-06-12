@@ -226,170 +226,239 @@
         }
     </style>
 </head>
-<body>
-    <div class="carousel-container">
-        <!-- Botón Saltar Intro -->
-        <button class="skip-intro-btn" onclick="goToMainSite()" title="Ir al sitio principal del Ministerio Público">
-            Saltar Intro
-        </button>
+<!-- Código específico para Google Sites - Sin fetch externo -->
+<div id="carousel-container" style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+    
+    <!-- Botón Saltar Intro -->
+    <button id="skip-btn" style="position: absolute; top: 15px; right: 15px; background: rgba(0, 0, 0, 0.7); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; z-index: 10; font-size: 14px;">
+        Saltar Intro
+    </button>
 
-        <!-- Contador de slides -->
-        <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">3</span>
-        </div>
+    <!-- Contador de slides -->
+    <div style="position: absolute; top: 15px; left: 15px; background: rgba(0, 0, 0, 0.7); color: white; padding: 5px 10px; border-radius: 5px; font-size: 14px; z-index: 10;">
+        <span id="current-slide">1</span> / <span id="total-slides">3</span>
+    </div>
 
-        <!-- Slide 1 - SOLO ESTE TIENE active -->
-        <div class="carousel-slide active">
-            <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
-                 alt="Comunicado 1" class="slide-image"
-                 onload="this.style.display='block'"
-                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen 1</div>'">
+    <!-- Slides Container -->
+    <div id="slides-wrapper" style="position: relative; width: 100%; height: 400px;">
+        
+        <!-- Slide 1 -->
+        <div class="slide" data-slide="1" style="position: absolute; width: 100%; height: 100%; opacity: 1; transition: opacity 0.5s ease;">
+            <img src="https://via.placeholder.com/800x400/2c5aa0/ffffff?text=Comunicado+1" 
+                 style="width: 100%; height: 100%; object-fit: cover; display: block;" 
+                 alt="Comunicado 1"
+                 onerror="this.src='https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg'">
         </div>
 
         <!-- Slide 2 -->
-        <div class="carousel-slide">
-            <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/main/fo1.jpeg" 
-                 alt="Comunicado 2" class="slide-image"
-                 onload="this.style.display='block'"
-                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen 2</div>'">
+        <div class="slide" data-slide="2" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
+            <img src="https://via.placeholder.com/800x400/28a745/ffffff?text=Comunicado+2" 
+                 style="width: 100%; height: 100%; object-fit: cover; display: block;" 
+                 alt="Comunicado 2"
+                 onerror="this.src='https://raw.githubusercontent.com/informaticafecor/iniciosite/main/fo1.jpeg'">
         </div>
 
         <!-- Slide 3 -->
-        <div class="carousel-slide">
-            <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
-                 alt="Comunicado 3" class="slide-image"
-                 onload="this.style.display='block'"
-                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen 3</div>'">
-        </div>
-
-        <!-- Flechas de navegación - SIN DUPLICADOS -->
-        <button class="nav-arrows nav-prev" onclick="previousSlide()">‹</button>
-        <button class="nav-arrows nav-next" onclick="nextSlide()">›</button>
-
-        <!-- Indicadores -->
-        <div class="carousel-indicators">
-            <div class="indicator active" onclick="currentSlideSet(1)"></div>
-            <div class="indicator" onclick="currentSlideSet(2)"></div>
-            <div class="indicator" onclick="currentSlideSet(3)"></div>
+        <div class="slide" data-slide="3" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
+            <img src="https://via.placeholder.com/800x400/ffc107/000000?text=Comunicado+3" 
+                 style="width: 100%; height: 100%; object-fit: cover; display: block;" 
+                 alt="Comunicado 3"
+                 onerror="this.src='https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg'">
         </div>
     </div>
 
-    <script>
-        let slideIndex = 1;
-        const totalSlides = 3;
-        let autoSlideInterval;
+    <!-- Flechas de navegación -->
+    <button id="prev-btn" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: white; border: none; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10;">‹</button>
+    <button id="next-btn" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: white; border: none; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10;">›</button>
 
+    <!-- Indicadores -->
+    <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10;">
+        <div class="indicator" data-slide="1" style="width: 12px; height: 12px; border-radius: 50%; background: white; cursor: pointer; transition: background 0.3s;"></div>
+        <div class="indicator" data-slide="2" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background 0.3s;"></div>
+        <div class="indicator" data-slide="3" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background 0.3s;"></div>
+    </div>
+</div>
+
+<script>
+(function() {
+    'use strict';
+    
+    console.log('🚀 Iniciando carrusel optimizado para Google Sites...');
+    
+    // Variables globales
+    let currentSlide = 1;
+    const totalSlides = 3;
+    let autoInterval = null;
+    const MAIN_SITE_URL = 'https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio';
+    
+    // Elementos del DOM
+    const slides = document.querySelectorAll('.slide');
+    const indicators = document.querySelectorAll('.indicator');
+    const currentSlideSpan = document.getElementById('current-slide');
+    const skipBtn = document.getElementById('skip-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    
+    // Función para mostrar slide
+    function showSlide(n) {
+        // Validar rango
+        if (n > totalSlides) currentSlide = 1;
+        if (n < 1) currentSlide = totalSlides;
+        
+        // Ocultar todos los slides
+        slides.forEach((slide, index) => {
+            slide.style.opacity = '0';
+        });
+        
+        // Resetear indicadores
+        indicators.forEach(indicator => {
+            indicator.style.background = 'rgba(255, 255, 255, 0.5)';
+        });
+        
+        // Mostrar slide actual
+        if (slides[currentSlide - 1]) {
+            slides[currentSlide - 1].style.opacity = '1';
+        }
+        
+        // Activar indicador
+        if (indicators[currentSlide - 1]) {
+            indicators[currentSlide - 1].style.background = 'white';
+        }
+        
         // Actualizar contador
-        document.getElementById('totalSlides').textContent = totalSlides;
-
-        function showSlide(n) {
-            const slides = document.querySelectorAll('.carousel-slide');
-            const indicators = document.querySelectorAll('.indicator');
-            
-            // Manejo circular de slides
-            if (n > totalSlides) slideIndex = 1;
-            if (n < 1) slideIndex = totalSlides;
-            
-            // Remover todas las clases active
-            slides.forEach(slide => slide.classList.remove('active'));
-            indicators.forEach(indicator => indicator.classList.remove('active'));
-            
-            // Activar slide e indicador actual
-            if (slides[slideIndex - 1]) {
-                slides[slideIndex - 1].classList.add('active');
-            }
-            if (indicators[slideIndex - 1]) {
-                indicators[slideIndex - 1].classList.add('active');
-            }
-            
-            // Actualizar contador
-            document.getElementById('currentSlide').textContent = slideIndex;
-            
-            console.log(`📸 Mostrando slide ${slideIndex} de ${totalSlides}`);
+        if (currentSlideSpan) {
+            currentSlideSpan.textContent = currentSlide;
         }
-
-        function nextSlide() {
-            slideIndex++;
-            showSlide(slideIndex);
-            resetAutoSlide();
+        
+        console.log('📸 Slide actual:', currentSlide);
+    }
+    
+    // Función siguiente slide
+    function nextSlide() {
+        currentSlide++;
+        showSlide(currentSlide);
+        resetAutoSlide();
+    }
+    
+    // Función slide anterior
+    function prevSlide() {
+        currentSlide--;
+        showSlide(currentSlide);
+        resetAutoSlide();
+    }
+    
+    // Función ir a slide específico
+    function goToSlide(n) {
+        currentSlide = n;
+        showSlide(currentSlide);
+        resetAutoSlide();
+    }
+    
+    // Función auto-slide
+    function autoSlide() {
+        currentSlide++;
+        showSlide(currentSlide);
+    }
+    
+    // Resetear auto-slide
+    function resetAutoSlide() {
+        if (autoInterval) {
+            clearInterval(autoInterval);
         }
-
-        function previousSlide() {
-            slideIndex--;
-            showSlide(slideIndex);
-            resetAutoSlide();
+        autoInterval = setInterval(autoSlide, 6000);
+    }
+    
+    // Función redirección
+    function redirectToMain() {
+        console.log('🔄 Redirigiendo a:', MAIN_SITE_URL);
+        try {
+            window.open(MAIN_SITE_URL, '_blank');
+        } catch (e) {
+            console.error('Error en redirección:', e);
         }
-
-        function currentSlideSet(n) {
-            slideIndex = n;
-            showSlide(slideIndex);
-            resetAutoSlide();
-        }
-
-        function autoSlide() {
-            slideIndex++;
-            showSlide(slideIndex);
-        }
-
-        function resetAutoSlide() {
-            clearInterval(autoSlideInterval);
-            autoSlideInterval = setInterval(autoSlide, 6000);
-        }
-
-        // URL del sitio principal
-        const MAIN_SITE_URL = 'https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio';
-
-        function goToMainSite() {
-            console.log('🔄 Redirigiendo al sitio principal:', MAIN_SITE_URL);
-            window.location.href = MAIN_SITE_URL;
-        }
-
-        // Inicializar carrusel
-        function initCarousel() {
-            console.log('🚀 Iniciando carrusel...');
-            showSlide(1); // Asegurar que empiece en slide 1
-            autoSlideInterval = setInterval(autoSlide, 6000);
-            console.log('✅ Carrusel iniciado con', totalSlides, 'slides');
-        }
-
-        // Eventos de mouse
-        document.querySelector('.carousel-container').addEventListener('mouseenter', () => {
-            clearInterval(autoSlideInterval);
-            console.log('⏸️ Carrusel pausado (mouse encima)');
+    }
+    
+    // Event Listeners
+    if (skipBtn) {
+        skipBtn.addEventListener('click', redirectToMain);
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', prevSlide);
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextSlide);
+    }
+    
+    // Indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            goToSlide(index + 1);
         });
-
-        document.querySelector('.carousel-container').addEventListener('mouseleave', () => {
-            resetAutoSlide();
-            console.log('▶️ Carrusel reanudado');
-        });
-
-        // Navegación con teclado
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                previousSlide();
+    });
+    
+    // Hover events
+    const container = document.getElementById('carousel-container');
+    if (container) {
+        container.addEventListener('mouseenter', () => {
+            if (autoInterval) {
+                clearInterval(autoInterval);
             }
-            if (e.key === 'ArrowRight') {
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            resetAutoSlide();
+        });
+    }
+    
+    // Navegación por teclado
+    document.addEventListener('keydown', (e) => {
+        switch(e.key) {
+            case 'ArrowLeft':
+                prevSlide();
+                break;
+            case 'ArrowRight':
                 nextSlide();
-            }
-            if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
-                if (e.key === ' ') e.preventDefault();
-                goToMainSite();
-            }
-            if (e.key === '1') currentSlideSet(1);
-            if (e.key === '2') currentSlideSet(2);
-            if (e.key === '3') currentSlideSet(3);
-        });
-
-        // Inicializar cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', initCarousel);
-
-        // Información de debugging
-        console.log('🎯 Carrusel del Ministerio Público cargado');
+                break;
+            case 'Escape':
+            case 'Enter':
+            case ' ':
+                e.preventDefault();
+                redirectToMain();
+                break;
+            case '1':
+                goToSlide(1);
+                break;
+            case '2':
+                goToSlide(2);
+                break;
+            case '3':
+                goToSlide(3);
+                break;
+        }
+    });
+    
+    // Inicialización
+    function init() {
+        console.log('🎯 Inicializando carrusel...');
+        showSlide(1);
+        resetAutoSlide();
+        console.log('✅ Carrusel iniciado correctamente');
         console.log('📊 Configuración:', {
-            totalSlides: totalSlides,
-            autoSlideInterval: '6 segundos',
-            sitePrincipal: MAIN_SITE_URL
+            slides: totalSlides,
+            autoInterval: '6 segundos',
+            controles: 'Flechas, indicadores, teclado'
         });
-    </script>
-</body>
+    }
+    
+    // Iniciar cuando esté listo
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+    
+})();
+</script>
 </html>
