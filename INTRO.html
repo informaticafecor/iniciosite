@@ -267,14 +267,16 @@
         let autoSlideInterval;
 
         // ✅ AQUÍ PON LA URL REAL DE TU GOOGLE SITES
-        // Por ejemplo: 'https://sites.google.com/view/ministerio-publico'
-        const MAIN_SITE_URL = 'CAMBIA-ESTA-URL-POR-TU-GOOGLE-SITES';
+        // IMPORTANTE: Debe ser la URL PÚBLICA, no la de edición
+        const MAIN_SITE_URL = 'https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio';
 
         function goToMainSite() {
             // Verificar si la URL fue cambiada
-            if (MAIN_SITE_URL === 'CAMBIA-ESTA-URL-POR-TU-GOOGLE-SITES') {
-                alert('⚠️ IMPORTANTE: Debes cambiar MAIN_SITE_URL en el código por la URL real de tu Google Sites');
-                console.error('❌ URL no configurada. Busca "MAIN_SITE_URL" en el código y cámbiala.');
+            if (MAIN_SITE_URL === 'https://sites.google.com/view/TU-NOMBRE-SITIO') {
+                alert('⚠️ IMPORTANTE: Debes cambiar MAIN_SITE_URL por la URL PÚBLICA de tu Google Sites\n\n' +
+                      '❌ NO uses URLs con "/edit" al final\n' +
+                      '✅ Usa la URL que aparece cuando publicas tu sitio');
+                console.error('❌ URL no configurada. Debe ser la URL PÚBLICA, no la de edición.');
                 return;
             }
             
@@ -355,8 +357,10 @@
         console.log('🔗 URL configurada:', MAIN_SITE_URL);
         
         // Verificar configuración
-        if (MAIN_SITE_URL === 'https://sites.google.com/d/1Vld4JD6BtniM1g9RnkWx96oe1ocplssY/p/1eAf_aW-O2zVw97brn_T-lhkECZ-WiZ0T/edit') {
-            console.warn('⚠️ Recuerda cambiar MAIN_SITE_URL por tu URL real');
+        if (MAIN_SITE_URL === 'https://sites.google.com/view/TU-NOMBRE-SITIO') {
+            console.warn('⚠️ Recuerda cambiar MAIN_SITE_URL por tu URL PÚBLICA (no la de edición)');
+        } else {
+            console.log('✅ URL configurada correctamente');
         }
     </script>
 </body>
