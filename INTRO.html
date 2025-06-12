@@ -1,15 +1,25 @@
-<!-- Carrusel SOLO CSS - Sin JavaScript - Compatible con Google Sites -->
+<!-- Carrusel estilo Ministerio Público del Perú -->
 <style>
-/* Estilos del carrusel */
+/* Contenedor principal con fondo azul oscuro */
+.mp-carousel-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Carrusel principal */
 .mp-carousel {
     position: relative;
-    width: 100%;
-    max-width: 800px;
+    width: 90%;
+    max-width: 1000px;
     margin: 0 auto;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    background: #f8f9fa;
 }
 
 /* Ocultar radio buttons */
@@ -17,23 +27,28 @@
     display: none;
 }
 
-/* Contenedor de slides */
-.mp-slides {
+/* Contenedor de slides centrado */
+.mp-slides-container {
     position: relative;
     width: 100%;
-    height: 400px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Cada slide individual */
+/* Slides individuales */
 .mp-slide {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    width: 85%;
+    height: 500px;
     opacity: 0;
-    transition: opacity 0.8s ease;
+    transition: all 0.6s ease-in-out;
     z-index: 1;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    background: #f8f9fa;
 }
 
 .mp-slide img {
@@ -43,144 +58,127 @@
     display: block;
 }
 
-/* Mostrar slide cuando su radio está checked */
-.mp-carousel input#slide1:checked ~ .mp-slides .mp-slide:nth-child(1),
-.mp-carousel input#slide2:checked ~ .mp-slides .mp-slide:nth-child(2),
-.mp-carousel input#slide3:checked ~ .mp-slides .mp-slide:nth-child(3) {
+/* Mostrar slide activo */
+.mp-carousel input#slide1:checked ~ .mp-slides-container .mp-slide:nth-child(1),
+.mp-carousel input#slide2:checked ~ .mp-slides-container .mp-slide:nth-child(2),
+.mp-carousel input#slide3:checked ~ .mp-slides-container .mp-slide:nth-child(3) {
     opacity: 1;
     z-index: 2;
 }
 
-/* Estilo de los controles de navegación */
+/* Contador estilo "1/3" */
+.mp-counter {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 10;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* Contador dinámico */
+.mp-carousel input#slide1:checked ~ .mp-counter::after { content: "1/3"; }
+.mp-carousel input#slide2:checked ~ .mp-counter::after { content: "2/3"; }
+.mp-carousel input#slide3:checked ~ .mp-counter::after { content: "3/3"; }
+
+/* Botón Saltar Intro */
+.mp-skip {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    z-index: 10;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.mp-skip:hover {
+    background: rgba(0, 0, 0, 0.9);
+    border-color: rgba(255,255,255,0.4);
+    transform: scale(1.05);
+}
+
+/* Flechas de navegación - estilo minimalista */
 .mp-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
     border: none;
-    font-size: 30px;
-    padding: 15px 20px;
+    font-size: 24px;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
-    z-index: 10;
+    z-index: 8;
     border-radius: 50%;
     transition: all 0.3s ease;
-    user-select: none;
-    text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    height: 60px;
+    text-decoration: none;
+    user-select: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .mp-nav:hover {
-    background: rgba(0, 0, 0, 0.9);
+    background: white;
     transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
-.mp-nav-prev {
-    left: 15px;
-}
+.mp-nav-prev { left: 50px; }
+.mp-nav-next { right: 50px; }
 
-.mp-nav-next {
-    right: 15px;
-}
-
-/* Indicadores */
+/* Indicadores de puntos - estilo minimalista */
 .mp-indicators {
     position: absolute;
-    bottom: 20px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 12px;
-    z-index: 10;
+    z-index: 8;
 }
 
 .mp-indicator {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.4);
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 2px solid rgba(0, 0, 0, 0.3);
+    border: none;
 }
 
 .mp-indicator:hover {
+    background: rgba(255, 255, 255, 0.7);
     transform: scale(1.2);
-    background: rgba(255, 255, 255, 0.8);
 }
 
-/* Mostrar flechas según slide activo */
-.mp-carousel input#slide1:checked ~ .mp-nav-prev:nth-of-type(4) { display: flex; } /* slide1: prev va a slide3 */
-.mp-carousel input#slide2:checked ~ .mp-nav-prev:nth-of-type(5) { display: flex; } /* slide2: prev va a slide1 */
-.mp-carousel input#slide3:checked ~ .mp-nav-prev:nth-of-type(6) { display: flex; } /* slide3: prev va a slide2 */
-
-.mp-carousel input#slide1:checked ~ .mp-nav-next:nth-of-type(7) { display: flex; } /* slide1: next va a slide2 */
-.mp-carousel input#slide2:checked ~ .mp-nav-next:nth-of-type(8) { display: flex; } /* slide2: next va a slide3 */
-.mp-carousel input#slide3:checked ~ .mp-nav-next:nth-of-type(9) { display: flex; } /* slide3: next va a slide1 */
-
-/* Indicadores activos - CORREGIDOS */
+/* Indicadores activos */
 .mp-carousel input#slide1:checked ~ .mp-indicators .mp-indicator:nth-child(1),
 .mp-carousel input#slide2:checked ~ .mp-indicators .mp-indicator:nth-child(2),
 .mp-carousel input#slide3:checked ~ .mp-indicators .mp-indicator:nth-child(3) {
     background: white !important;
-    border-color: rgba(0, 0, 0, 0.8) !important;
-    transform: scale(1.4) !important;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transform: scale(1.3) !important;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
 }
 
-/* Botón saltar intro */
-.mp-skip {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    z-index: 15;
-    font-size: 14px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.mp-skip:hover {
-    background: rgba(0, 0, 0, 0.95);
-    transform: scale(1.05);
-}
-
-/* Contador */
-.mp-counter {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 14px;
-    z-index: 15;
-    font-weight: bold;
-}
-
-/* Actualizar contador basado en slide activo */
-.mp-counter::after {
-    content: "1 / 3";
-}
-
-.mp-carousel input#slide2:checked ~ .mp-counter::after {
-    content: "2 / 3";
-}
-
-.mp-carousel input#slide3:checked ~ .mp-counter::after {
-    content: "3 / 3";
-}
-
-/* Fallbacks para imágenes que no cargan */
+/* Fallbacks para imágenes */
 .mp-fallback {
     display: flex;
     align-items: center;
@@ -192,6 +190,7 @@
     font-weight: bold;
     text-align: center;
     flex-direction: column;
+    gap: 15px;
 }
 
 .mp-fallback-2 {
@@ -202,78 +201,166 @@
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
-/* Animación automática (opcional - puedes comentar esto si no quieres auto-slide) */
-@keyframes mp-auto-slide {
+.mp-fallback-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.mp-fallback-title {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.mp-fallback-subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* Auto-slide cada 8 segundos */
+@keyframes mp-auto-cycle {
     0%, 30% { opacity: 1; }
     33%, 63% { opacity: 0; }
     66%, 96% { opacity: 0; }
     100% { opacity: 1; }
 }
 
-.mp-carousel input#slide1:checked ~ .mp-slides .mp-slide:nth-child(1) {
-    animation: mp-auto-slide 18s infinite;
+.mp-carousel input#slide1:checked ~ .mp-slides-container .mp-slide:nth-child(1) {
+    animation: mp-auto-cycle 24s infinite;
 }
 
-.mp-carousel input#slide1:checked ~ .mp-slides .mp-slide:nth-child(2) {
-    animation: mp-auto-slide 18s infinite 6s;
+.mp-carousel input#slide1:checked ~ .mp-slides-container .mp-slide:nth-child(2) {
+    animation: mp-auto-cycle 24s infinite 8s;
 }
 
-.mp-carousel input#slide1:checked ~ .mp-slides .mp-slide:nth-child(3) {
-    animation: mp-auto-slide 18s infinite 12s;
+.mp-carousel input#slide1:checked ~ .mp-slides-container .mp-slide:nth-child(3) {
+    animation: mp-auto-cycle 24s infinite 16s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mp-carousel-wrapper {
+        min-height: 70vh;
+        padding: 10px;
+    }
+    
+    .mp-slide {
+        width: 95%;
+        height: 400px;
+    }
+    
+    .mp-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+    
+    .mp-nav-prev { left: 20px; }
+    .mp-nav-next { right: 20px; }
+    
+    .mp-counter, .mp-skip {
+        top: 20px;
+        font-size: 12px;
+        padding: 8px 12px;
+    }
 }
 </style>
 
-<div class="mp-carousel">
-    <!-- Radio buttons para controlar slides -->
-    <input type="radio" name="mp-slide" id="slide1" checked>
-    <input type="radio" name="mp-slide" id="slide2">
-    <input type="radio" name="mp-slide" id="slide3">
-    
-    <!-- Botón Saltar Intro -->
-    <a href="https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio" target="_blank" class="mp-skip">
-        ⏭️ Saltar Intro
-    </a>
-    
-    <!-- Contador automático -->
-    <div class="mp-counter"></div>
-    
-    <!-- Contenedor de slides -->
-    <div class="mp-slides">
-        <div class="mp-slide">
-            <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
-                 alt="Comunicado 1"
-                 onerror="this.parentElement.innerHTML='<div class=mp-fallback><div>📰</div><div>COMUNICADO 1</div><div style=font-size:16px;margin-top:10px;>Ministerio Público del Perú</div></div>'">
+<div class="mp-carousel-wrapper">
+    <div class="mp-carousel">
+        <!-- Radio buttons para controlar slides -->
+        <input type="radio" name="mp-slide" id="slide1" checked>
+        <input type="radio" name="mp-slide" id="slide2">
+        <input type="radio" name="mp-slide" id="slide3">
+        
+        <!-- Contador automático -->
+        <div class="mp-counter"></div>
+        
+        <!-- Botón Saltar Intro -->
+        <a href="https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio" target="_blank" class="mp-skip">
+            Saltar Intro
+        </a>
+        
+        <!-- Contenedor de slides centrado -->
+        <div class="mp-slides-container">
+            <div class="mp-slide">
+                <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
+                     alt="Comunicado Ministerio Público 1"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="mp-fallback" style="display: none;">
+                    <div class="mp-fallback-icon">📰</div>
+                    <div class="mp-fallback-title">COMUNICADO 1</div>
+                    <div class="mp-fallback-subtitle">Ministerio Público del Perú</div>
+                </div>
+            </div>
+            
+            <div class="mp-slide">
+                <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/main/fo1.jpeg" 
+                     alt="Comunicado Ministerio Público 2"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="mp-fallback mp-fallback-2" style="display: none;">
+                    <div class="mp-fallback-icon">📰</div>
+                    <div class="mp-fallback-title">COMUNICADO 2</div>
+                    <div class="mp-fallback-subtitle">Ministerio Público del Perú</div>
+                </div>
+            </div>
+            
+            <div class="mp-slide">
+                <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
+                     alt="Comunicado Ministerio Público 3"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="mp-fallback mp-fallback-3" style="display: none;">
+                    <div class="mp-fallback-icon">📰</div>
+                    <div class="mp-fallback-title">COMUNICADO 3</div>
+                    <div class="mp-fallback-subtitle">Ministerio Público del Perú</div>
+                </div>
+            </div>
         </div>
         
-        <div class="mp-slide">
-            <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/main/fo1.jpeg" 
-                 alt="Comunicado 2"
-                 onerror="this.parentElement.innerHTML='<div class=mp-fallback mp-fallback-2><div>📰</div><div>COMUNICADO 2</div><div style=font-size:16px;margin-top:10px;>Ministerio Público del Perú</div></div>'">
-        </div>
+        <!-- Flechas de navegación -->
+        <!-- Desde slide 1: prev→3, next→2 -->
+        <!-- Desde slide 2: prev→1, next→3 -->
+        <!-- Desde slide 3: prev→2, next→1 -->
         
-        <div class="mp-slide">
-            <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
-                 alt="Comunicado 3"
-                 onerror="this.parentElement.innerHTML='<div class=mp-fallback mp-fallback-3><div>📰</div><div>COMUNICADO 3</div><div style=font-size:16px;margin-top:10px;>Ministerio Público del Perú</div></div>'">
+        <label for="slide3" class="mp-nav mp-nav-prev" style="display: none;">‹</label>
+        <label for="slide1" class="mp-nav mp-nav-prev" style="display: none;">‹</label>
+        <label for="slide2" class="mp-nav mp-nav-prev" style="display: none;">‹</label>
+        
+        <label for="slide2" class="mp-nav mp-nav-next" style="display: none;">›</label>
+        <label for="slide3" class="mp-nav mp-nav-next" style="display: none;">›</label>
+        <label for="slide1" class="mp-nav mp-nav-next" style="display: none;">›</label>
+        
+        <!-- Indicadores -->
+        <div class="mp-indicators">
+            <label for="slide1" class="mp-indicator"></label>
+            <label for="slide2" class="mp-indicator"></label>
+            <label for="slide3" class="mp-indicator"></label>
         </div>
-    </div>
-    
-    <!-- Controles de navegación -->
-    <label for="slide3" class="mp-nav mp-nav-prev">‹</label>
-    <label for="slide2" class="mp-nav mp-nav-next">›</label>
-    
-    <!-- Indicadores -->
-    <div class="mp-indicators">
-        <label for="slide1" class="mp-indicator"></label>
-        <label for="slide2" class="mp-indicator"></label>
-        <label for="slide3" class="mp-indicator"></label>
     </div>
 </div>
 
-<!-- JavaScript mínimo solo para logging (opcional) -->
+<!-- CSS para mostrar flechas según slide activo -->
+<style>
+/* Slide 1 activo */
+.mp-carousel input#slide1:checked ~ label.mp-nav-prev:nth-of-type(4) { display: flex; }
+.mp-carousel input#slide1:checked ~ label.mp-nav-next:nth-of-type(7) { display: flex; }
+
+/* Slide 2 activo */
+.mp-carousel input#slide2:checked ~ label.mp-nav-prev:nth-of-type(5) { display: flex; }
+.mp-carousel input#slide2:checked ~ label.mp-nav-next:nth-of-type(8) { display: flex; }
+
+/* Slide 3 activo */
+.mp-carousel input#slide3:checked ~ label.mp-nav-prev:nth-of-type(6) { display: flex; }
+.mp-carousel input#slide3:checked ~ label.mp-nav-next:nth-of-type(9) { display: flex; }
+</style>
+
 <script>
-console.log('✅ Carrusel CSS puro cargado');
-console.log('🎮 Controles: Haz clic en flechas, círculos o espera el auto-slide');
-console.log('⏭️ Auto-slide: Cambia cada 6 segundos automáticamente');
-console.log('🔗 Saltar Intro: Va al sitio principal');
+console.log('✅ Carrusel estilo Ministerio Público cargado');
+console.log('🎨 Características:');
+console.log('  • Fondo azul gradiente institucional');
+console.log('  • Imagen centrada con marco redondeado');
+console.log('  • Controles minimalistas y elegantes');
+console.log('  • Contador dinámico 1/3, 2/3, 3/3');
+console.log('  • Auto-slide cada 8 segundos');
+console.log('  • Responsive para móviles');
+console.log('🎮 Controles: Flechas, puntos, auto-slide');
 </script>
