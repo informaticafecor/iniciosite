@@ -226,247 +226,302 @@
         }
     </style>
 </head>
-<!-- Carrusel con eventos inline - Más compatible con Google Sites -->
-<div id="carousel-container" style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+<!-- Carrusel completamente autónomo para Google Sites -->
+<div id="mp-carousel" style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); background: #f0f0f0;">
     
     <!-- Botón Saltar Intro -->
-    <button onclick="window.open('https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio', '_blank')" 
-            style="position: absolute; top: 15px; right: 15px; background: rgba(0, 0, 0, 0.7); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; z-index: 10; font-size: 14px;">
+    <a href="https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio" target="_blank" 
+       style="position: absolute; top: 15px; right: 15px; background: rgba(0, 0, 0, 0.7); color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; z-index: 10; font-size: 14px; display: block;">
         Saltar Intro
-    </button>
+    </a>
 
     <!-- Contador de slides -->
     <div style="position: absolute; top: 15px; left: 15px; background: rgba(0, 0, 0, 0.7); color: white; padding: 5px 10px; border-radius: 5px; font-size: 14px; z-index: 10;">
-        <span id="current-slide">1</span> / <span id="total-slides">3</span>
+        <span id="mp-current">1</span> / <span>3</span>
     </div>
 
     <!-- Slides Container -->
-    <div id="slides-wrapper" style="position: relative; width: 100%; height: 400px; background: #f0f0f0;">
+    <div style="position: relative; width: 100%; height: 400px;">
         
         <!-- Slide 1 -->
-        <div id="slide-1" style="position: absolute; width: 100%; height: 100%; opacity: 1; transition: opacity 0.5s ease; z-index: 2;">
+        <div id="mp-slide-1" style="position: absolute; width: 100%; height: 100%; opacity: 1; transition: opacity 0.5s ease; z-index: 2;">
             <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
                  style="width: 100%; height: 100%; object-fit: cover; display: block;" 
                  alt="Comunicado 1"
                  onload="console.log('✅ Imagen 1 cargada')"
-                 onerror="this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#dc3545;color:white;font-size:18px;>❌ Error imagen 1</div>'">
+                 onerror="this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#17a2b8;color:white;font-size:18px;>📰 Comunicado 1</div>'">
         </div>
 
         <!-- Slide 2 -->
-        <div id="slide-2" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease; z-index: 1;">
+        <div id="mp-slide-2" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease; z-index: 1;">
             <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/main/fo1.jpeg" 
                  style="width: 100%; height: 100%; object-fit: cover; display: block;" 
                  alt="Comunicado 2"
                  onload="console.log('✅ Imagen 2 cargada')"
-                 onerror="this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#dc3545;color:white;font-size:18px;>❌ Error imagen 2</div>'">
+                 onerror="this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#28a745;color:white;font-size:18px;>📰 Comunicado 2</div>'">
         </div>
 
         <!-- Slide 3 -->
-        <div id="slide-3" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease; z-index: 1;">
+        <div id="mp-slide-3" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease; z-index: 1;">
             <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
                  style="width: 100%; height: 100%; object-fit: cover; display: block;" 
                  alt="Comunicado 3"
                  onload="console.log('✅ Imagen 3 cargada')"
-                 onerror="this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#dc3545;color:white;font-size:18px;>❌ Error imagen 3</div>'">
+                 onerror="this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#ffc107;color:black;font-size:18px;>📰 Comunicado 3</div>'">
         </div>
     </div>
 
-    <!-- Flechas de navegación con onclick directo -->
-    <button onclick="previousSlide()" 
-            style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.7); color: white; border: none; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10; border-radius: 5px;">
-        ‹
-    </button>
-    <button onclick="nextSlide()" 
-            style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.7); color: white; border: none; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10; border-radius: 5px;">
-        ›
-    </button>
+    <!-- Flechas de navegación -->
+    <div id="mp-prev" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.7); color: white; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10; border-radius: 5px; user-select: none;">‹</div>
+    <div id="mp-next" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.7); color: white; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10; border-radius: 5px; user-select: none;">›</div>
 
-    <!-- Indicadores con onclick directo -->
+    <!-- Indicadores -->
     <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10;">
-        <div onclick="goToSlide(1)" 
-             id="indicator-1"
-             style="width: 12px; height: 12px; border-radius: 50%; background: white; cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
-        <div onclick="goToSlide(2)" 
-             id="indicator-2"
-             style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
-        <div onclick="goToSlide(3)" 
-             id="indicator-3"
-             style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
+        <div id="mp-dot-1" style="width: 12px; height: 12px; border-radius: 50%; background: white; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
+        <div id="mp-dot-2" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
+        <div id="mp-dot-3" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
     </div>
 </div>
 
 <script>
-// Variables globales accesibles desde onclick
-window.currentSlideIndex = 1;
-window.totalSlidesCount = 3;
-window.autoSlideTimer = null;
-
-console.log('🚀 Iniciando carrusel con eventos inline...');
-
-// Función para mostrar slide específico
-window.showSlide = function(slideNumber) {
-    console.log(`📸 Mostrando slide ${slideNumber}`);
+(function() {
+    'use strict';
     
-    // Ocultar todos los slides
-    for(let i = 1; i <= totalSlidesCount; i++) {
-        const slide = document.getElementById(`slide-${i}`);
-        const indicator = document.getElementById(`indicator-${i}`);
+    console.log('🚀 Iniciando carrusel autónomo del Ministerio Público...');
+    
+    // Variables locales encapsuladas
+    let currentIndex = 1;
+    const totalSlides = 3;
+    let autoTimer = null;
+    
+    // Función para cambiar slide
+    function changeSlide(newIndex) {
+        console.log(`📸 Cambiando a slide ${newIndex}`);
         
-        if(slide) {
-            slide.style.opacity = '0';
-            slide.style.zIndex = '1';
+        // Validar rango
+        if (newIndex > totalSlides) newIndex = 1;
+        if (newIndex < 1) newIndex = totalSlides;
+        
+        // Ocultar todos los slides
+        for (let i = 1; i <= totalSlides; i++) {
+            const slide = document.getElementById(`mp-slide-${i}`);
+            const dot = document.getElementById(`mp-dot-${i}`);
+            
+            if (slide) {
+                slide.style.opacity = '0';
+                slide.style.zIndex = '1';
+            }
+            
+            if (dot) {
+                dot.style.background = 'rgba(255, 255, 255, 0.5)';
+                dot.style.transform = 'scale(1)';
+            }
         }
         
-        if(indicator) {
-            indicator.style.background = 'rgba(255, 255, 255, 0.5)';
+        // Mostrar slide actual
+        const activeSlide = document.getElementById(`mp-slide-${newIndex}`);
+        const activeDot = document.getElementById(`mp-dot-${newIndex}`);
+        
+        if (activeSlide) {
+            activeSlide.style.opacity = '1';
+            activeSlide.style.zIndex = '2';
+        }
+        
+        if (activeDot) {
+            activeDot.style.background = 'white';
+            activeDot.style.transform = 'scale(1.2)';
+        }
+        
+        // Actualizar contador
+        const counter = document.getElementById('mp-current');
+        if (counter) {
+            counter.textContent = newIndex;
+        }
+        
+        currentIndex = newIndex;
+    }
+    
+    // Función auto-slide
+    function autoAdvance() {
+        changeSlide(currentIndex + 1);
+    }
+    
+    // Resetear timer
+    function resetTimer() {
+        if (autoTimer) {
+            clearInterval(autoTimer);
+        }
+        autoTimer = setInterval(autoAdvance, 6000);
+        console.log('🔄 Timer reiniciado (6 segundos)');
+    }
+    
+    // Configurar eventos
+    function setupEvents() {
+        // Botón anterior
+        const prevBtn = document.getElementById('mp-prev');
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function() {
+                console.log('⬅️ Click anterior');
+                changeSlide(currentIndex - 1);
+                resetTimer();
+            });
+            
+            prevBtn.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(0, 0, 0, 0.9)';
+            });
+            
+            prevBtn.addEventListener('mouseleave', function() {
+                this.style.background = 'rgba(0, 0, 0, 0.7)';
+            });
+        }
+        
+        // Botón siguiente
+        const nextBtn = document.getElementById('mp-next');
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function() {
+                console.log('➡️ Click siguiente');
+                changeSlide(currentIndex + 1);
+                resetTimer();
+            });
+            
+            nextBtn.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(0, 0, 0, 0.9)';
+            });
+            
+            nextBtn.addEventListener('mouseleave', function() {
+                this.style.background = 'rgba(0, 0, 0, 0.7)';
+            });
+        }
+        
+        // Indicadores
+        for (let i = 1; i <= totalSlides; i++) {
+            const dot = document.getElementById(`mp-dot-${i}`);
+            if (dot) {
+                dot.addEventListener('click', function() {
+                    console.log(`🎯 Click indicador ${i}`);
+                    changeSlide(i);
+                    resetTimer();
+                });
+                
+                dot.addEventListener('mouseenter', function() {
+                    if (i !== currentIndex) {
+                        this.style.transform = 'scale(1.1)';
+                        this.style.background = 'rgba(255, 255, 255, 0.8)';
+                    }
+                });
+                
+                dot.addEventListener('mouseleave', function() {
+                    if (i !== currentIndex) {
+                        this.style.transform = 'scale(1)';
+                        this.style.background = 'rgba(255, 255, 255, 0.5)';
+                    }
+                });
+            }
+        }
+        
+        console.log('✅ Eventos configurados correctamente');
+    }
+    
+    // Configurar hover para pausar
+    function setupHover() {
+        const carousel = document.getElementById('mp-carousel');
+        if (carousel) {
+            carousel.addEventListener('mouseenter', function() {
+                if (autoTimer) {
+                    clearInterval(autoTimer);
+                }
+                console.log('⏸️ Auto-slide pausado (hover)');
+            });
+            
+            carousel.addEventListener('mouseleave', function() {
+                resetTimer();
+                console.log('▶️ Auto-slide reanudado');
+            });
         }
     }
     
-    // Mostrar slide actual
-    const activeSlide = document.getElementById(`slide-${slideNumber}`);
-    const activeIndicator = document.getElementById(`indicator-${slideNumber}`);
-    
-    if(activeSlide) {
-        activeSlide.style.opacity = '1';
-        activeSlide.style.zIndex = '2';
+    // Configurar teclado
+    function setupKeyboard() {
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    changeSlide(currentIndex - 1);
+                    resetTimer();
+                    break;
+                case 'ArrowRight':
+                    changeSlide(currentIndex + 1);
+                    resetTimer();
+                    break;
+                case 'Escape':
+                case 'Enter':
+                case ' ':
+                    e.preventDefault();
+                    window.open('https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio', '_blank');
+                    break;
+                case '1':
+                    changeSlide(1);
+                    resetTimer();
+                    break;
+                case '2':
+                    changeSlide(2);
+                    resetTimer();
+                    break;
+                case '3':
+                    changeSlide(3);
+                    resetTimer();
+                    break;
+            }
+        });
+        console.log('⌨️ Navegación por teclado configurada');
     }
     
-    if(activeIndicator) {
-        activeIndicator.style.background = 'white';
-    }
-    
-    // Actualizar contador
-    const counterElement = document.getElementById('current-slide');
-    if(counterElement) {
-        counterElement.textContent = slideNumber;
-    }
-    
-    window.currentSlideIndex = slideNumber;
-}
-
-// Función para ir al siguiente slide
-window.nextSlide = function() {
-    console.log('➡️ Siguiente slide');
-    let nextIndex = window.currentSlideIndex + 1;
-    if(nextIndex > window.totalSlidesCount) {
-        nextIndex = 1;
-    }
-    window.showSlide(nextIndex);
-    window.resetAutoSlide();
-}
-
-// Función para ir al slide anterior
-window.previousSlide = function() {
-    console.log('⬅️ Slide anterior');
-    let prevIndex = window.currentSlideIndex - 1;
-    if(prevIndex < 1) {
-        prevIndex = window.totalSlidesCount;
-    }
-    window.showSlide(prevIndex);
-    window.resetAutoSlide();
-}
-
-// Función para ir a slide específico
-window.goToSlide = function(slideNumber) {
-    console.log(`🎯 Ir a slide ${slideNumber}`);
-    window.showSlide(slideNumber);
-    window.resetAutoSlide();
-}
-
-// Auto-slide
-window.autoSlide = function() {
-    window.nextSlide();
-}
-
-window.resetAutoSlide = function() {
-    if(window.autoSlideTimer) {
-        clearInterval(window.autoSlideTimer);
-    }
-    window.autoSlideTimer = setInterval(window.autoSlide, 6000);
-    console.log('🔄 Auto-slide reiniciado');
-}
-
-// Función de redirección (backup)
-window.redirectToMainSite = function() {
-    const url = 'https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio';
-    console.log('🔗 Redirigiendo a:', url);
-    window.open(url, '_blank');
-}
-
-// Navegación por teclado
-document.addEventListener('keydown', function(e) {
-    switch(e.key) {
-        case 'ArrowLeft':
-            window.previousSlide();
-            break;
-        case 'ArrowRight':
-            window.nextSlide();
-            break;
-        case 'Escape':
-        case 'Enter':
-        case ' ':
-            e.preventDefault();
-            window.redirectToMainSite();
-            break;
-        case '1':
-            window.goToSlide(1);
-            break;
-        case '2':
-            window.goToSlide(2);
-            break;
-        case '3':
-            window.goToSlide(3);
-            break;
-    }
-});
-
-// Pausar en hover
-const carouselContainer = document.getElementById('carousel-container');
-if(carouselContainer) {
-    carouselContainer.addEventListener('mouseenter', function() {
-        if(window.autoSlideTimer) {
-            clearInterval(window.autoSlideTimer);
+    // Inicialización
+    function init() {
+        console.log('🎯 Inicializando carrusel...');
+        
+        // Verificar que los elementos existen
+        const slide1 = document.getElementById('mp-slide-1');
+        const prev = document.getElementById('mp-prev');
+        const next = document.getElementById('mp-next');
+        
+        if (!slide1 || !prev || !next) {
+            console.error('❌ No se encontraron elementos del carrusel');
+            return;
         }
-        console.log('⏸️ Auto-slide pausado');
-    });
+        
+        // Configurar todo
+        setupEvents();
+        setupHover();
+        setupKeyboard();
+        
+        // Mostrar primer slide
+        changeSlide(1);
+        
+        // Iniciar auto-slide
+        resetTimer();
+        
+        console.log('✅ Carrusel iniciado exitosamente');
+        console.log('📋 Configuración:', {
+            slides: totalSlides,
+            autoInterval: '6 segundos',
+            controles: 'Flechas, indicadores, teclado, hover'
+        });
+        
+        console.log('🎮 Controles disponibles:');
+        console.log('  • Clic en flechas ← →');
+        console.log('  • Clic en círculos indicadores');
+        console.log('  • Teclado: ← → 1 2 3 Enter Escape Espacio');
+        console.log('  • Hover para pausar auto-slide');
+    }
     
-    carouselContainer.addEventListener('mouseleave', function() {
-        window.resetAutoSlide();
-        console.log('▶️ Auto-slide reanudado');
-    });
-}
-
-// Inicialización
-function initCarousel() {
-    console.log('🎯 Inicializando carrusel...');
-    window.showSlide(1);
-    window.resetAutoSlide();
-    console.log('✅ Carrusel iniciado exitosamente');
-    console.log('📋 Controles disponibles:');
-    console.log('  • Flechas ← → para navegar');
-    console.log('  • Círculos para ir a slide específico');
-    console.log('  • Botón "Saltar Intro" para ir al sitio');
-    console.log('  • Teclado: ← → 1 2 3 Enter Escape Espacio');
+    // Esperar a que el DOM esté listo
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        // Si ya está cargado, inicializar inmediatamente
+        setTimeout(init, 100);
+    }
     
-    // Test de funciones
-    console.log('🧪 Probando funciones...');
-    console.log('window.nextSlide disponible:', typeof window.nextSlide);
-    console.log('window.previousSlide disponible:', typeof window.previousSlide);
-    console.log('window.goToSlide disponible:', typeof window.goToSlide);
-}
-
-// Iniciar cuando esté listo
-if(document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCarousel);
-} else {
-    initCarousel();
-}
-
-// Test de funciones (para debugging)
-console.log('🧪 Funciones disponibles globalmente:');
-console.log('  • window.nextSlide()');
-console.log('  • window.previousSlide()');
-console.log('  • window.goToSlide(1), window.goToSlide(2), window.goToSlide(3)');
-console.log('  • window.showSlide(número)');
+})();
 </script>
 </html>
