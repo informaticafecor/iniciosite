@@ -227,11 +227,12 @@
     </style>
 </head>
 
-<!-- Carrusel usando SOLO tus imágenes de GitHub - Sin placeholders -->
+<!-- Carrusel con eventos inline - Más compatible con Google Sites -->
 <div id="carousel-container" style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
     
     <!-- Botón Saltar Intro -->
-    <button id="skip-btn" style="position: absolute; top: 15px; right: 15px; background: rgba(0, 0, 0, 0.7); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; z-index: 10; font-size: 14px;">
+    <button onclick="window.open('https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio', '_blank')" 
+            style="position: absolute; top: 15px; right: 15px; background: rgba(0, 0, 0, 0.7); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; z-index: 10; font-size: 14px;">
         Saltar Intro
     </button>
 
@@ -243,292 +244,225 @@
     <!-- Slides Container -->
     <div id="slides-wrapper" style="position: relative; width: 100%; height: 400px; background: #f0f0f0;">
         
-        <!-- Slide 1: Imagen WhatsApp de imagenes_noticias -->
-        <div class="slide" data-slide="1" style="position: absolute; width: 100%; height: 100%; opacity: 1; transition: opacity 0.5s ease;">
+        <!-- Slide 1 -->
+        <div id="slide-1" style="position: absolute; width: 100%; height: 100%; opacity: 1; transition: opacity 0.5s ease; z-index: 2;">
             <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
                  style="width: 100%; height: 100%; object-fit: cover; display: block;" 
-                 alt="Comunicado Ministerio Público 1"
-                 onload="console.log('✅ Imagen 1 cargada exitosamente')"
-                 onerror="console.error('❌ Error cargando imagen 1'); this.style.display='none'; this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#e9ecef;color:#6c757d;font-size:18px;>Error: Imagen 1 no disponible</div>'">
+                 alt="Comunicado 1"
+                 onload="console.log('✅ Imagen 1 cargada')"
+                 onerror="this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#dc3545;color:white;font-size:18px;>❌ Error imagen 1</div>'">
         </div>
 
-        <!-- Slide 2: Imagen fo1.jpeg de iniciosite -->
-        <div class="slide" data-slide="2" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
+        <!-- Slide 2 -->
+        <div id="slide-2" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease; z-index: 1;">
             <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/main/fo1.jpeg" 
                  style="width: 100%; height: 100%; object-fit: cover; display: block;" 
-                 alt="Comunicado Ministerio Público 2"
-                 onload="console.log('✅ Imagen 2 cargada exitosamente')"
-                 onerror="console.error('❌ Error cargando imagen 2'); this.style.display='none'; this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#e9ecef;color:#6c757d;font-size:18px;>Error: Imagen 2 no disponible</div>'">
+                 alt="Comunicado 2"
+                 onload="console.log('✅ Imagen 2 cargada')"
+                 onerror="this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#dc3545;color:white;font-size:18px;>❌ Error imagen 2</div>'">
         </div>
 
-        <!-- Slide 3: Repetir imagen WhatsApp (o puedes usar otra) -->
-        <div class="slide" data-slide="3" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
+        <!-- Slide 3 -->
+        <div id="slide-3" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease; z-index: 1;">
             <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
                  style="width: 100%; height: 100%; object-fit: cover; display: block;" 
-                 alt="Comunicado Ministerio Público 3"
-                 onload="console.log('✅ Imagen 3 cargada exitosamente')"
-                 onerror="console.error('❌ Error cargando imagen 3'); this.style.display='none'; this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#e9ecef;color:#6c757d;font-size:18px;>Error: Imagen 3 no disponible</div>'">
+                 alt="Comunicado 3"
+                 onload="console.log('✅ Imagen 3 cargada')"
+                 onerror="this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#dc3545;color:white;font-size:18px;>❌ Error imagen 3</div>'">
         </div>
     </div>
 
-    <!-- Flechas de navegación -->
-    <button id="prev-btn" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: white; border: none; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10; border-radius: 5px; transition: background 0.3s;">‹</button>
-    <button id="next-btn" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: white; border: none; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10; border-radius: 5px; transition: background 0.3s;">›</button>
+    <!-- Flechas de navegación con onclick directo -->
+    <button onclick="previousSlide()" 
+            style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.7); color: white; border: none; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10; border-radius: 5px;">
+        ‹
+    </button>
+    <button onclick="nextSlide()" 
+            style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.7); color: white; border: none; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10; border-radius: 5px;">
+        ›
+    </button>
 
-    <!-- Indicadores -->
+    <!-- Indicadores con onclick directo -->
     <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10;">
-        <div class="indicator" data-slide="1" style="width: 12px; height: 12px; border-radius: 50%; background: white; cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
-        <div class="indicator" data-slide="2" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
-        <div class="indicator" data-slide="3" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
+        <div onclick="goToSlide(1)" 
+             id="indicator-1"
+             style="width: 12px; height: 12px; border-radius: 50%; background: white; cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
+        <div onclick="goToSlide(2)" 
+             id="indicator-2"
+             style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
+        <div onclick="goToSlide(3)" 
+             id="indicator-3"
+             style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
     </div>
 </div>
 
 <script>
-(function() {
-    'use strict';
+// Variables globales accesibles desde onclick
+let currentSlideIndex = 1;
+const totalSlidesCount = 3;
+let autoSlideTimer = null;
+
+console.log('🚀 Iniciando carrusel con eventos inline...');
+
+// Función para mostrar slide específico
+function showSlide(slideNumber) {
+    console.log(`📸 Mostrando slide ${slideNumber}`);
     
-    console.log('🚀 Carrusel Ministerio Público - Versión GitHub exclusiva');
-    
-    // Configuración
-    let currentSlide = 1;
-    const totalSlides = 3;
-    let autoInterval = null;
-    const MAIN_SITE_URL = 'https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio';
-    
-    // Elementos del DOM
-    const slides = document.querySelectorAll('.slide');
-    const indicators = document.querySelectorAll('.indicator');
-    const currentSlideSpan = document.getElementById('current-slide');
-    const skipBtn = document.getElementById('skip-btn');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    
-    console.log(`📊 Elementos encontrados: ${slides.length} slides, ${indicators.length} indicadores`);
-    
-    // Función principal para mostrar slides
-    function showSlide(n) {
-        // Controlar rango circular
-        if (n > totalSlides) currentSlide = 1;
-        if (n < 1) currentSlide = totalSlides;
+    // Ocultar todos los slides
+    for(let i = 1; i <= totalSlidesCount; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        const indicator = document.getElementById(`indicator-${i}`);
         
-        // Ocultar todos los slides
-        slides.forEach((slide, index) => {
+        if(slide) {
             slide.style.opacity = '0';
             slide.style.zIndex = '1';
-        });
+        }
         
-        // Resetear todos los indicadores
-        indicators.forEach(indicator => {
+        if(indicator) {
             indicator.style.background = 'rgba(255, 255, 255, 0.5)';
-        });
-        
-        // Mostrar slide actual
-        if (slides[currentSlide - 1]) {
-            slides[currentSlide - 1].style.opacity = '1';
-            slides[currentSlide - 1].style.zIndex = '2';
-        }
-        
-        // Activar indicador actual
-        if (indicators[currentSlide - 1]) {
-            indicators[currentSlide - 1].style.background = 'white';
-        }
-        
-        // Actualizar contador
-        if (currentSlideSpan) {
-            currentSlideSpan.textContent = currentSlide;
-        }
-        
-        console.log(`📸 Mostrando slide ${currentSlide} de ${totalSlides}`);
-    }
-    
-    // Funciones de navegación
-    function nextSlide() {
-        currentSlide++;
-        showSlide(currentSlide);
-        resetAutoSlide();
-        console.log('➡️ Siguiente slide');
-    }
-    
-    function prevSlide() {
-        currentSlide--;
-        showSlide(currentSlide);
-        resetAutoSlide();
-        console.log('⬅️ Slide anterior');
-    }
-    
-    function goToSlide(n) {
-        currentSlide = n;
-        showSlide(currentSlide);
-        resetAutoSlide();
-        console.log(`🎯 Ir a slide ${n}`);
-    }
-    
-    // Auto-slide
-    function autoSlide() {
-        currentSlide++;
-        showSlide(currentSlide);
-    }
-    
-    function resetAutoSlide() {
-        if (autoInterval) {
-            clearInterval(autoInterval);
-        }
-        autoInterval = setInterval(autoSlide, 6000);
-        console.log('🔄 Auto-slide reiniciado (6 segundos)');
-    }
-    
-    // Redirección al sitio principal
-    function redirectToMain() {
-        console.log('🔗 Redirigiendo al sitio principal...');
-        try {
-            window.open(MAIN_SITE_URL, '_blank');
-            console.log('✅ Redirección exitosa');
-        } catch (e) {
-            console.error('❌ Error en redirección:', e);
-            // Fallback
-            window.location.href = MAIN_SITE_URL;
         }
     }
     
-    // Configurar event listeners
-    function setupEventListeners() {
-        // Botón saltar
-        if (skipBtn) {
-            skipBtn.addEventListener('click', redirectToMain);
-            console.log('✅ Botón "Saltar Intro" configurado');
-        }
-        
-        // Botones de navegación
-        if (prevBtn) {
-            prevBtn.addEventListener('click', prevSlide);
-            prevBtn.addEventListener('mouseenter', () => {
-                prevBtn.style.background = 'rgba(0, 0, 0, 0.8)';
-            });
-            prevBtn.addEventListener('mouseleave', () => {
-                prevBtn.style.background = 'rgba(0, 0, 0, 0.6)';
-            });
-        }
-        
-        if (nextBtn) {
-            nextBtn.addEventListener('click', nextSlide);
-            nextBtn.addEventListener('mouseenter', () => {
-                nextBtn.style.background = 'rgba(0, 0, 0, 0.8)';
-            });
-            nextBtn.addEventListener('mouseleave', () => {
-                nextBtn.style.background = 'rgba(0, 0, 0, 0.6)';
-            });
-        }
-        
-        // Indicadores
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                goToSlide(index + 1);
-            });
-            indicator.addEventListener('mouseenter', () => {
-                indicator.style.transform = 'scale(1.2)';
-            });
-            indicator.addEventListener('mouseleave', () => {
-                indicator.style.transform = 'scale(1)';
-            });
-        });
-        
-        console.log('✅ Event listeners configurados');
+    // Mostrar slide actual
+    const activeSlide = document.getElementById(`slide-${slideNumber}`);
+    const activeIndicator = document.getElementById(`indicator-${slideNumber}`);
+    
+    if(activeSlide) {
+        activeSlide.style.opacity = '1';
+        activeSlide.style.zIndex = '2';
     }
     
-    // Eventos de hover para pausar auto-slide
-    function setupHoverEvents() {
-        const container = document.getElementById('carousel-container');
-        if (container) {
-            container.addEventListener('mouseenter', () => {
-                if (autoInterval) {
-                    clearInterval(autoInterval);
-                }
-                console.log('⏸️ Auto-slide pausado (mouse encima)');
-            });
-            
-            container.addEventListener('mouseleave', () => {
-                resetAutoSlide();
-                console.log('▶️ Auto-slide reanudado');
-            });
-        }
+    if(activeIndicator) {
+        activeIndicator.style.background = 'white';
     }
     
-    // Navegación por teclado
-    function setupKeyboardNavigation() {
-        document.addEventListener('keydown', (e) => {
-            switch(e.key) {
-                case 'ArrowLeft':
-                    prevSlide();
-                    break;
-                case 'ArrowRight':
-                    nextSlide();
-                    break;
-                case 'Escape':
-                case 'Enter':
-                case ' ':
-                    e.preventDefault();
-                    redirectToMain();
-                    break;
-                case '1':
-                    goToSlide(1);
-                    break;
-                case '2':
-                    goToSlide(2);
-                    break;
-                case '3':
-                    goToSlide(3);
-                    break;
-            }
-        });
-        console.log('✅ Navegación por teclado configurada');
+    // Actualizar contador
+    const counterElement = document.getElementById('current-slide');
+    if(counterElement) {
+        counterElement.textContent = slideNumber;
     }
     
-    // Inicialización principal
-    function init() {
-        console.log('🎯 Inicializando carrusel del Ministerio Público...');
-        
-        // Verificar elementos
-        if (slides.length === 0) {
-            console.error('❌ No se encontraron slides');
-            return;
-        }
-        
-        // Configurar todo
-        setupEventListeners();
-        setupHoverEvents();
-        setupKeyboardNavigation();
-        
-        // Mostrar primer slide
-        showSlide(1);
-        
-        // Iniciar auto-slide
-        resetAutoSlide();
-        
-        console.log('✅ Carrusel iniciado correctamente');
-        console.log('📋 Información del carrusel:', {
-            slides: totalSlides,
-            autoInterval: '6 segundos',
-            sitioDestino: MAIN_SITE_URL,
-            controles: ['Flechas', 'Indicadores', 'Teclado', 'Auto-slide']
-        });
-        
-        // Mensaje para el usuario
-        console.log('🎮 Controles disponibles:');
-        console.log('  • ← → : Navegar slides');
-        console.log('  • 1, 2, 3 : Ir a slide específico');
-        console.log('  • Escape/Enter/Espacio : Ir al sitio principal');
-        console.log('  • Hover: Pausar auto-slide');
-    }
-    
-    // Ejecutar cuando esté listo
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
-    
-})();
-</script>
+    currentSlideIndex = slideNumber;
+}
 
+// Función para ir al siguiente slide
+function nextSlide() {
+    console.log('➡️ Siguiente slide');
+    let nextIndex = currentSlideIndex + 1;
+    if(nextIndex > totalSlidesCount) {
+        nextIndex = 1;
+    }
+    showSlide(nextIndex);
+    resetAutoSlide();
+}
+
+// Función para ir al slide anterior
+function previousSlide() {
+    console.log('⬅️ Slide anterior');
+    let prevIndex = currentSlideIndex - 1;
+    if(prevIndex < 1) {
+        prevIndex = totalSlidesCount;
+    }
+    showSlide(prevIndex);
+    resetAutoSlide();
+}
+
+// Función para ir a slide específico
+function goToSlide(slideNumber) {
+    console.log(`🎯 Ir a slide ${slideNumber}`);
+    showSlide(slideNumber);
+    resetAutoSlide();
+}
+
+// Auto-slide
+function autoSlide() {
+    nextSlide();
+}
+
+function resetAutoSlide() {
+    if(autoSlideTimer) {
+        clearInterval(autoSlideTimer);
+    }
+    autoSlideTimer = setInterval(autoSlide, 6000);
+    console.log('🔄 Auto-slide reiniciado');
+}
+
+// Función de redirección (backup)
+function redirectToMainSite() {
+    const url = 'https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio';
+    console.log('🔗 Redirigiendo a:', url);
+    window.open(url, '_blank');
+}
+
+// Navegación por teclado
+document.addEventListener('keydown', function(e) {
+    switch(e.key) {
+        case 'ArrowLeft':
+            previousSlide();
+            break;
+        case 'ArrowRight':
+            nextSlide();
+            break;
+        case 'Escape':
+        case 'Enter':
+        case ' ':
+            e.preventDefault();
+            redirectToMainSite();
+            break;
+        case '1':
+            goToSlide(1);
+            break;
+        case '2':
+            goToSlide(2);
+            break;
+        case '3':
+            goToSlide(3);
+            break;
+    }
+});
+
+// Pausar en hover
+const carouselContainer = document.getElementById('carousel-container');
+if(carouselContainer) {
+    carouselContainer.addEventListener('mouseenter', function() {
+        if(autoSlideTimer) {
+            clearInterval(autoSlideTimer);
+        }
+        console.log('⏸️ Auto-slide pausado');
+    });
+    
+    carouselContainer.addEventListener('mouseleave', function() {
+        resetAutoSlide();
+        console.log('▶️ Auto-slide reanudado');
+    });
+}
+
+// Inicialización
+function initCarousel() {
+    console.log('🎯 Inicializando carrusel...');
+    showSlide(1);
+    resetAutoSlide();
+    console.log('✅ Carrusel iniciado exitosamente');
+    console.log('📋 Controles disponibles:');
+    console.log('  • Flechas ← → para navegar');
+    console.log('  • Círculos para ir a slide específico');
+    console.log('  • Botón "Saltar Intro" para ir al sitio');
+    console.log('  • Teclado: ← → 1 2 3 Enter Escape Espacio');
+}
+
+// Iniciar cuando esté listo
+if(document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+} else {
+    initCarousel();
+}
+
+// Test de funciones (para debugging)
+console.log('🧪 Funciones disponibles globalmente:');
+console.log('  • nextSlide()');
+console.log('  • previousSlide()');
+console.log('  • goToSlide(1), goToSlide(2), goToSlide(3)');
+console.log('  • showSlide(número)');
+</script>
 
 </html>
