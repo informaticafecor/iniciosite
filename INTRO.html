@@ -226,7 +226,8 @@
         }
     </style>
 </head>
-<!-- Código específico para Google Sites - Sin fetch externo -->
+
+<!-- Carrusel usando SOLO tus imágenes de GitHub - Sin placeholders -->
 <div id="carousel-container" style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
     
     <!-- Botón Saltar Intro -->
@@ -240,42 +241,45 @@
     </div>
 
     <!-- Slides Container -->
-    <div id="slides-wrapper" style="position: relative; width: 100%; height: 400px;">
+    <div id="slides-wrapper" style="position: relative; width: 100%; height: 400px; background: #f0f0f0;">
         
-        <!-- Slide 1 -->
+        <!-- Slide 1: Imagen WhatsApp de imagenes_noticias -->
         <div class="slide" data-slide="1" style="position: absolute; width: 100%; height: 100%; opacity: 1; transition: opacity 0.5s ease;">
-            <img src="https://via.placeholder.com/800x400/2c5aa0/ffffff?text=Comunicado+1" 
+            <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
                  style="width: 100%; height: 100%; object-fit: cover; display: block;" 
-                 alt="Comunicado 1"
-                 onerror="this.src='https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg'">
+                 alt="Comunicado Ministerio Público 1"
+                 onload="console.log('✅ Imagen 1 cargada exitosamente')"
+                 onerror="console.error('❌ Error cargando imagen 1'); this.style.display='none'; this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#e9ecef;color:#6c757d;font-size:18px;>Error: Imagen 1 no disponible</div>'">
         </div>
 
-        <!-- Slide 2 -->
+        <!-- Slide 2: Imagen fo1.jpeg de iniciosite -->
         <div class="slide" data-slide="2" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
-            <img src="https://via.placeholder.com/800x400/28a745/ffffff?text=Comunicado+2" 
+            <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/main/fo1.jpeg" 
                  style="width: 100%; height: 100%; object-fit: cover; display: block;" 
-                 alt="Comunicado 2"
-                 onerror="this.src='https://raw.githubusercontent.com/informaticafecor/iniciosite/main/fo1.jpeg'">
+                 alt="Comunicado Ministerio Público 2"
+                 onload="console.log('✅ Imagen 2 cargada exitosamente')"
+                 onerror="console.error('❌ Error cargando imagen 2'); this.style.display='none'; this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#e9ecef;color:#6c757d;font-size:18px;>Error: Imagen 2 no disponible</div>'">
         </div>
 
-        <!-- Slide 3 -->
+        <!-- Slide 3: Repetir imagen WhatsApp (o puedes usar otra) -->
         <div class="slide" data-slide="3" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease;">
-            <img src="https://via.placeholder.com/800x400/ffc107/000000?text=Comunicado+3" 
+            <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
                  style="width: 100%; height: 100%; object-fit: cover; display: block;" 
-                 alt="Comunicado 3"
-                 onerror="this.src='https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg'">
+                 alt="Comunicado Ministerio Público 3"
+                 onload="console.log('✅ Imagen 3 cargada exitosamente')"
+                 onerror="console.error('❌ Error cargando imagen 3'); this.style.display='none'; this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:#e9ecef;color:#6c757d;font-size:18px;>Error: Imagen 3 no disponible</div>'">
         </div>
     </div>
 
     <!-- Flechas de navegación -->
-    <button id="prev-btn" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: white; border: none; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10;">‹</button>
-    <button id="next-btn" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: white; border: none; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10;">›</button>
+    <button id="prev-btn" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: white; border: none; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10; border-radius: 5px; transition: background 0.3s;">‹</button>
+    <button id="next-btn" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: white; border: none; font-size: 30px; padding: 10px 15px; cursor: pointer; z-index: 10; border-radius: 5px; transition: background 0.3s;">›</button>
 
     <!-- Indicadores -->
     <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10;">
-        <div class="indicator" data-slide="1" style="width: 12px; height: 12px; border-radius: 50%; background: white; cursor: pointer; transition: background 0.3s;"></div>
-        <div class="indicator" data-slide="2" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background 0.3s;"></div>
-        <div class="indicator" data-slide="3" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background 0.3s;"></div>
+        <div class="indicator" data-slide="1" style="width: 12px; height: 12px; border-radius: 50%; background: white; cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
+        <div class="indicator" data-slide="2" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
+        <div class="indicator" data-slide="3" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
     </div>
 </div>
 
@@ -283,9 +287,9 @@
 (function() {
     'use strict';
     
-    console.log('🚀 Iniciando carrusel optimizado para Google Sites...');
+    console.log('🚀 Carrusel Ministerio Público - Versión GitHub exclusiva');
     
-    // Variables globales
+    // Configuración
     let currentSlide = 1;
     const totalSlides = 3;
     let autoInterval = null;
@@ -299,18 +303,21 @@
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     
-    // Función para mostrar slide
+    console.log(`📊 Elementos encontrados: ${slides.length} slides, ${indicators.length} indicadores`);
+    
+    // Función principal para mostrar slides
     function showSlide(n) {
-        // Validar rango
+        // Controlar rango circular
         if (n > totalSlides) currentSlide = 1;
         if (n < 1) currentSlide = totalSlides;
         
         // Ocultar todos los slides
         slides.forEach((slide, index) => {
             slide.style.opacity = '0';
+            slide.style.zIndex = '1';
         });
         
-        // Resetear indicadores
+        // Resetear todos los indicadores
         indicators.forEach(indicator => {
             indicator.style.background = 'rgba(255, 255, 255, 0.5)';
         });
@@ -318,9 +325,10 @@
         // Mostrar slide actual
         if (slides[currentSlide - 1]) {
             slides[currentSlide - 1].style.opacity = '1';
+            slides[currentSlide - 1].style.zIndex = '2';
         }
         
-        // Activar indicador
+        // Activar indicador actual
         if (indicators[currentSlide - 1]) {
             indicators[currentSlide - 1].style.background = 'white';
         }
@@ -330,129 +338,189 @@
             currentSlideSpan.textContent = currentSlide;
         }
         
-        console.log('📸 Slide actual:', currentSlide);
+        console.log(`📸 Mostrando slide ${currentSlide} de ${totalSlides}`);
     }
     
-    // Función siguiente slide
+    // Funciones de navegación
     function nextSlide() {
         currentSlide++;
         showSlide(currentSlide);
         resetAutoSlide();
+        console.log('➡️ Siguiente slide');
     }
     
-    // Función slide anterior
     function prevSlide() {
         currentSlide--;
         showSlide(currentSlide);
         resetAutoSlide();
+        console.log('⬅️ Slide anterior');
     }
     
-    // Función ir a slide específico
     function goToSlide(n) {
         currentSlide = n;
         showSlide(currentSlide);
         resetAutoSlide();
+        console.log(`🎯 Ir a slide ${n}`);
     }
     
-    // Función auto-slide
+    // Auto-slide
     function autoSlide() {
         currentSlide++;
         showSlide(currentSlide);
     }
     
-    // Resetear auto-slide
     function resetAutoSlide() {
         if (autoInterval) {
             clearInterval(autoInterval);
         }
         autoInterval = setInterval(autoSlide, 6000);
+        console.log('🔄 Auto-slide reiniciado (6 segundos)');
     }
     
-    // Función redirección
+    // Redirección al sitio principal
     function redirectToMain() {
-        console.log('🔄 Redirigiendo a:', MAIN_SITE_URL);
+        console.log('🔗 Redirigiendo al sitio principal...');
         try {
             window.open(MAIN_SITE_URL, '_blank');
+            console.log('✅ Redirección exitosa');
         } catch (e) {
-            console.error('Error en redirección:', e);
+            console.error('❌ Error en redirección:', e);
+            // Fallback
+            window.location.href = MAIN_SITE_URL;
         }
     }
     
-    // Event Listeners
-    if (skipBtn) {
-        skipBtn.addEventListener('click', redirectToMain);
-    }
-    
-    if (prevBtn) {
-        prevBtn.addEventListener('click', prevSlide);
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', nextSlide);
-    }
-    
-    // Indicadores
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-            goToSlide(index + 1);
-        });
-    });
-    
-    // Hover events
-    const container = document.getElementById('carousel-container');
-    if (container) {
-        container.addEventListener('mouseenter', () => {
-            if (autoInterval) {
-                clearInterval(autoInterval);
-            }
+    // Configurar event listeners
+    function setupEventListeners() {
+        // Botón saltar
+        if (skipBtn) {
+            skipBtn.addEventListener('click', redirectToMain);
+            console.log('✅ Botón "Saltar Intro" configurado');
+        }
+        
+        // Botones de navegación
+        if (prevBtn) {
+            prevBtn.addEventListener('click', prevSlide);
+            prevBtn.addEventListener('mouseenter', () => {
+                prevBtn.style.background = 'rgba(0, 0, 0, 0.8)';
+            });
+            prevBtn.addEventListener('mouseleave', () => {
+                prevBtn.style.background = 'rgba(0, 0, 0, 0.6)';
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', nextSlide);
+            nextBtn.addEventListener('mouseenter', () => {
+                nextBtn.style.background = 'rgba(0, 0, 0, 0.8)';
+            });
+            nextBtn.addEventListener('mouseleave', () => {
+                nextBtn.style.background = 'rgba(0, 0, 0, 0.6)';
+            });
+        }
+        
+        // Indicadores
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                goToSlide(index + 1);
+            });
+            indicator.addEventListener('mouseenter', () => {
+                indicator.style.transform = 'scale(1.2)';
+            });
+            indicator.addEventListener('mouseleave', () => {
+                indicator.style.transform = 'scale(1)';
+            });
         });
         
-        container.addEventListener('mouseleave', () => {
-            resetAutoSlide();
-        });
+        console.log('✅ Event listeners configurados');
+    }
+    
+    // Eventos de hover para pausar auto-slide
+    function setupHoverEvents() {
+        const container = document.getElementById('carousel-container');
+        if (container) {
+            container.addEventListener('mouseenter', () => {
+                if (autoInterval) {
+                    clearInterval(autoInterval);
+                }
+                console.log('⏸️ Auto-slide pausado (mouse encima)');
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                resetAutoSlide();
+                console.log('▶️ Auto-slide reanudado');
+            });
+        }
     }
     
     // Navegación por teclado
-    document.addEventListener('keydown', (e) => {
-        switch(e.key) {
-            case 'ArrowLeft':
-                prevSlide();
-                break;
-            case 'ArrowRight':
-                nextSlide();
-                break;
-            case 'Escape':
-            case 'Enter':
-            case ' ':
-                e.preventDefault();
-                redirectToMain();
-                break;
-            case '1':
-                goToSlide(1);
-                break;
-            case '2':
-                goToSlide(2);
-                break;
-            case '3':
-                goToSlide(3);
-                break;
-        }
-    });
-    
-    // Inicialización
-    function init() {
-        console.log('🎯 Inicializando carrusel...');
-        showSlide(1);
-        resetAutoSlide();
-        console.log('✅ Carrusel iniciado correctamente');
-        console.log('📊 Configuración:', {
-            slides: totalSlides,
-            autoInterval: '6 segundos',
-            controles: 'Flechas, indicadores, teclado'
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    prevSlide();
+                    break;
+                case 'ArrowRight':
+                    nextSlide();
+                    break;
+                case 'Escape':
+                case 'Enter':
+                case ' ':
+                    e.preventDefault();
+                    redirectToMain();
+                    break;
+                case '1':
+                    goToSlide(1);
+                    break;
+                case '2':
+                    goToSlide(2);
+                    break;
+                case '3':
+                    goToSlide(3);
+                    break;
+            }
         });
+        console.log('✅ Navegación por teclado configurada');
     }
     
-    // Iniciar cuando esté listo
+    // Inicialización principal
+    function init() {
+        console.log('🎯 Inicializando carrusel del Ministerio Público...');
+        
+        // Verificar elementos
+        if (slides.length === 0) {
+            console.error('❌ No se encontraron slides');
+            return;
+        }
+        
+        // Configurar todo
+        setupEventListeners();
+        setupHoverEvents();
+        setupKeyboardNavigation();
+        
+        // Mostrar primer slide
+        showSlide(1);
+        
+        // Iniciar auto-slide
+        resetAutoSlide();
+        
+        console.log('✅ Carrusel iniciado correctamente');
+        console.log('📋 Información del carrusel:', {
+            slides: totalSlides,
+            autoInterval: '6 segundos',
+            sitioDestino: MAIN_SITE_URL,
+            controles: ['Flechas', 'Indicadores', 'Teclado', 'Auto-slide']
+        });
+        
+        // Mensaje para el usuario
+        console.log('🎮 Controles disponibles:');
+        console.log('  • ← → : Navegar slides');
+        console.log('  • 1, 2, 3 : Ir a slide específico');
+        console.log('  • Escape/Enter/Espacio : Ir al sitio principal');
+        console.log('  • Hover: Pausar auto-slide');
+    }
+    
+    // Ejecutar cuando esté listo
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
@@ -461,4 +529,6 @@
     
 })();
 </script>
+
+
 </html>
