@@ -235,7 +235,7 @@
 
         <!-- Contador de slides -->
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">2</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">3</span>
         </div>
 
         <!-- Slide 1 -->
@@ -256,7 +256,7 @@
 
         <div class="carousel-slide active">
             <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/refs/heads/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
-                 alt="Comunicado 1" class="slide-image"
+                 alt="Comunicado 3" class="slide-image"
                  onload="this.style.display='block'"
                  onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen</div>'">
         </div>
@@ -276,7 +276,7 @@
 
     <script>
         let slideIndex = 1;
-        const totalSlides = 2;
+        const totalSlides = 3; // para agregar mas imagenes..
         let autoSlideInterval;
 
         document.getElementById('totalSlides').textContent = totalSlides;
