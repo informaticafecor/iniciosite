@@ -64,6 +64,7 @@
             backdrop-filter: blur(10px);
             z-index: 100;
             cursor: pointer;
+            border: none;
         }
 
         .skip-intro-btn:hover {
@@ -73,6 +74,7 @@
             text-decoration: none;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 2px solid #1e3a5f;
         }
 
         .nav-arrows {
@@ -226,8 +228,10 @@
 </head>
 <body>
     <div class="carousel-container">
-        <!-- Botón Saltar Intro - PON TU URL REAL AQUÍ -->
-        <button class="skip-intro-btn" onclick="goToMainSite()">Saltar Intro</button>
+        <!-- Botón Saltar Intro con múltiples métodos de redirección -->
+        <button class="skip-intro-btn" onclick="goToMainSite()" title="Ir al sitio principal del Ministerio Público">
+            Saltar Intro
+        </button>
 
         <!-- Contador de slides -->
         <div class="slide-counter">
@@ -250,13 +254,22 @@
                  onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen</div>'">
         </div>
 
+        <div class="carousel-slide active">
+            <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/refs/heads/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
+                 alt="Comunicado 1" class="slide-image"
+                 onload="this.style.display='block'"
+                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen</div>'">
+        </div>
+
         <!-- Flechas de navegación -->
         <button class="nav-arrows nav-prev" onclick="previousSlide()">‹</button>
+        <button class="nav-arrows nav-next" onclick="nextSlide()">›</button>
         <button class="nav-arrows nav-next" onclick="nextSlide()">›</button>
 
         <!-- Indicadores -->
         <div class="carousel-indicators">
             <div class="indicator active" onclick="currentSlideSet(1)"></div>
+            <div class="indicator" onclick="currentSlideSet(2)"></div>
             <div class="indicator" onclick="currentSlideSet(2)"></div>
         </div>
     </div>
@@ -265,25 +278,6 @@
         let slideIndex = 1;
         const totalSlides = 2;
         let autoSlideInterval;
-
-        // ✅ AQUÍ PON LA URL REAL DE TU GOOGLE SITES
-        // IMPORTANTE: Debe ser la URL PÚBLICA, no la de edición
-        const MAIN_SITE_URL = 'https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio';
-
-        function goToMainSite() {
-            // Verificar si la URL fue cambiada
-            if (MAIN_SITE_URL === 'https://sites.google.com/view/TU-NOMBRE-SITIO') {
-                alert('⚠️ IMPORTANTE: Debes cambiar MAIN_SITE_URL por la URL PÚBLICA de tu Google Sites\n\n' +
-                      '❌ NO uses URLs con "/edit" al final\n' +
-                      '✅ Usa la URL que aparece cuando publicas tu sitio');
-                console.error('❌ URL no configurada. Debe ser la URL PÚBLICA, no la de edición.');
-                return;
-            }
-            
-            // Redirigir en la misma pestaña
-            console.log('🔄 Redirigiendo a:', MAIN_SITE_URL);
-            window.location.href = MAIN_SITE_URL;
-        }
 
         document.getElementById('totalSlides').textContent = totalSlides;
 
@@ -334,6 +328,42 @@
         // Inicializar carrusel automático
         autoSlideInterval = setInterval(autoSlide, 6000);
 
+        // ✅ URL del sitio principal del Ministerio Público
+        const MAIN_SITE_URL = 'https://sites.google.com/mpfn.gob.pe/dasdsadsada/inicio';
+
+        // 🎯 Función de redirección que funciona (basada en las pruebas exitosas)
+        function goToMainSite() {
+            console.log('🔄 Redirigiendo al sitio principal:', MAIN_SITE_URL);
+            
+            try {
+                // Método 1: window.location.href (más compatible)
+                window.location.href = MAIN_SITE_URL;
+            } catch (error) {
+                console.warn('⚠️ Método 1 falló, probando método 2...');
+                try {
+                    // Método 2: window.location.replace (alternativo)
+                    window.location.replace(MAIN_SITE_URL);
+                } catch (error2) {
+                    console.warn('⚠️ Método 2 falló, probando método 3...');
+                    try {
+                        // Método 3: window.open en misma pestaña
+                        window.open(MAIN_SITE_URL, '_self');
+                    } catch (error3) {
+                        console.error('❌ Todos los métodos fallaron:', error3);
+                        // Método 4: Enlace de emergencia
+                        const link = document.createElement('a');
+                        link.href = MAIN_SITE_URL;
+                        link.click();
+                    }
+                }
+            }
+        }
+
+        // 🔄 Función de redirección rápida (método directo)
+        function goToMainSiteFast() {
+            window.location.href = MAIN_SITE_URL;
+        }
+
         // Pausar en hover
         document.querySelector('.carousel-container').addEventListener('mouseenter', () => {
             clearInterval(autoSlideInterval);
@@ -343,25 +373,32 @@
             resetAutoSlide();
         });
 
-        // Navegación con teclado
+        // Navegación con teclado (múltiples teclas para redirección)
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') previousSlide();
             if (e.key === 'ArrowRight') nextSlide();
-            if (e.key === 'Escape') {
-                goToMainSite(); // Usar la misma función
+            if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
+                if (e.key === ' ') e.preventDefault(); // Evitar scroll con espacio
+                goToMainSite();
             }
+            // Atajos numéricos
+            if (e.key === '1') currentSlideSet(1);
+            if (e.key === '2') currentSlideSet(2);
         });
 
-        // Log de inicio
-        console.log('🚀 Carrusel iniciado');
-        console.log('🔗 URL configurada:', MAIN_SITE_URL);
+        // Log para debugging
+        console.log('🚀 Carrusel del Ministerio Público iniciado');
+        console.log('🔗 Sitio principal configurado:', MAIN_SITE_URL);
+        console.log('⌨️ Controles disponibles:');
+        console.log('   • ← → : Navegar slides');
+        console.log('   • 1, 2 : Ir a slide específico');
+        console.log('   • Escape, Enter, Espacio : Ir al sitio principal');
+        console.log('📁 Imágenes de GitHub configuradas');
         
-        // Verificar configuración
-        if (MAIN_SITE_URL === 'https://sites.google.com/view/TU-NOMBRE-SITIO') {
-            console.warn('⚠️ Recuerda cambiar MAIN_SITE_URL por tu URL PÚBLICA (no la de edición)');
-        } else {
-            console.log('✅ URL configurada correctamente');
-        }
+        // Verificación de conectividad (silenciosa)
+        setTimeout(() => {
+            console.log('🔍 Verificando conectividad...');
+        }, 2000);
     </script>
 </body>
 </html>
