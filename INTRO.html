@@ -1,6 +1,5 @@
-<!-- Carrusel SOLO CSS - Sin JavaScript - Compatible con Google Sites -->
+<!-- Carrusel CSS corregido - Navegación y indicadores funcionando -->
 <style>
-/* Estilos del carrusel */
 .mp-carousel {
     position: relative;
     width: 100%;
@@ -8,7 +7,7 @@
     margin: 0 auto;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 30px rgba(0,0,0,0.15);
     background: #f8f9fa;
 }
 
@@ -24,7 +23,7 @@
     height: 400px;
 }
 
-/* Cada slide individual */
+/* Slides */
 .mp-slide {
     position: absolute;
     top: 0;
@@ -32,7 +31,7 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 0.8s ease;
+    transition: opacity 0.6s ease-in-out;
     z-index: 1;
 }
 
@@ -43,7 +42,7 @@
     display: block;
 }
 
-/* Mostrar slide cuando su radio está checked */
+/* Mostrar slide activo */
 .mp-carousel input#slide1:checked ~ .mp-slides .mp-slide:nth-child(1),
 .mp-carousel input#slide2:checked ~ .mp-slides .mp-slide:nth-child(2),
 .mp-carousel input#slide3:checked ~ .mp-slides .mp-slide:nth-child(3) {
@@ -51,96 +50,27 @@
     z-index: 2;
 }
 
-/* Estilo de los controles de navegación */
-.mp-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    border: none;
-    font-size: 30px;
-    padding: 15px 20px;
-    cursor: pointer;
-    z-index: 10;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    user-select: none;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-}
-
-.mp-nav:hover {
-    background: rgba(0, 0, 0, 0.9);
-    transform: translateY(-50%) scale(1.1);
-}
-
-.mp-nav-prev {
-    left: 15px;
-}
-
-.mp-nav-next {
-    right: 15px;
-}
-
-/* Indicadores */
-.mp-indicators {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 12px;
-    z-index: 10;
-}
-
-.mp-indicator {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(0, 0, 0, 0.3);
-}
-
-.mp-indicator:hover {
-    transform: scale(1.2);
-    background: rgba(255, 255, 255, 0.8);
-}
-
-/* Indicador activo */
-.mp-carousel input#slide1:checked ~ .mp-indicators .mp-indicator:nth-child(1),
-.mp-carousel input#slide2:checked ~ .mp-indicators .mp-indicator:nth-child(2),
-.mp-carousel input#slide3:checked ~ .mp-indicators .mp-indicator:nth-child(3) {
-    background: white;
-    border-color: rgba(0, 0, 0, 0.8);
-    transform: scale(1.3);
-}
-
 /* Botón saltar intro */
 .mp-skip {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     color: white;
     text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    z-index: 15;
+    padding: 12px 20px;
+    border-radius: 25px;
+    z-index: 20;
     font-size: 14px;
     font-weight: bold;
     transition: all 0.3s ease;
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
 .mp-skip:hover {
     background: rgba(0, 0, 0, 0.95);
     transform: scale(1.05);
+    border-color: rgba(255,255,255,0.4);
 }
 
 /* Contador */
@@ -148,29 +78,106 @@
     position: absolute;
     top: 15px;
     left: 15px;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 25px;
+    font-size: 14px;
+    z-index: 20;
+    font-weight: bold;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+/* Contador dinámico */
+.mp-carousel input#slide1:checked ~ .mp-counter::after { content: "1 / 3"; }
+.mp-carousel input#slide2:checked ~ .mp-counter::after { content: "2 / 3"; }
+.mp-carousel input#slide3:checked ~ .mp-counter::after { content: "3 / 3"; }
+
+/* Flechas de navegación */
+.mp-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.8);
     color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 14px;
-    z-index: 15;
+    border: none;
+    font-size: 35px;
     font-weight: bold;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    z-index: 15;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    user-select: none;
+    border: 3px solid rgba(255,255,255,0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-/* Actualizar contador basado en slide activo */
-.mp-counter::after {
-    content: "1 / 3";
+.mp-nav:hover {
+    background: rgba(0, 0, 0, 0.95);
+    transform: translateY(-50%) scale(1.1);
+    border-color: rgba(255,255,255,0.6);
 }
 
-.mp-carousel input#slide2:checked ~ .mp-counter::after {
-    content: "2 / 3";
+.mp-nav-prev { left: 20px; }
+.mp-nav-next { right: 20px; }
+
+/* Indicadores */
+.mp-indicators {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 15;
 }
 
-.mp-carousel input#slide3:checked ~ .mp-counter::after {
-    content: "3 / 3";
+.mp-indicator {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* Fallbacks para imágenes que no cargan */
+.mp-indicator:hover {
+    transform: scale(1.2);
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Indicadores activos */
+.mp-carousel input#slide1:checked ~ .mp-indicators .mp-indicator:nth-child(1) {
+    background: white !important;
+    border-color: rgba(0, 0, 0, 0.8) !important;
+    transform: scale(1.3) !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+
+.mp-carousel input#slide2:checked ~ .mp-indicators .mp-indicator:nth-child(2) {
+    background: white !important;
+    border-color: rgba(0, 0, 0, 0.8) !important;
+    transform: scale(1.3) !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+
+.mp-carousel input#slide3:checked ~ .mp-indicators .mp-indicator:nth-child(3) {
+    background: white !important;
+    border-color: rgba(0, 0, 0, 0.8) !important;
+    transform: scale(1.3) !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+
+/* Fallbacks para imágenes */
 .mp-fallback {
     display: flex;
     align-items: center;
@@ -178,10 +185,11 @@
     height: 100%;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     text-align: center;
     flex-direction: column;
+    gap: 10px;
 }
 
 .mp-fallback-2 {
@@ -192,8 +200,8 @@
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
-/* Animación automática (opcional - puedes comentar esto si no quieres auto-slide) */
-@keyframes mp-auto-slide {
+/* Auto-slide animación (cada 8 segundos) */
+@keyframes mp-auto-cycle {
     0%, 30% { opacity: 1; }
     33%, 63% { opacity: 0; }
     66%, 96% { opacity: 0; }
@@ -201,15 +209,15 @@
 }
 
 .mp-carousel input#slide1:checked ~ .mp-slides .mp-slide:nth-child(1) {
-    animation: mp-auto-slide 18s infinite;
+    animation: mp-auto-cycle 24s infinite;
 }
 
 .mp-carousel input#slide1:checked ~ .mp-slides .mp-slide:nth-child(2) {
-    animation: mp-auto-slide 18s infinite 6s;
+    animation: mp-auto-cycle 24s infinite 8s;
 }
 
 .mp-carousel input#slide1:checked ~ .mp-slides .mp-slide:nth-child(3) {
-    animation: mp-auto-slide 18s infinite 12s;
+    animation: mp-auto-cycle 24s infinite 16s;
 }
 </style>
 
@@ -232,25 +240,36 @@
         <div class="mp-slide">
             <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
                  alt="Comunicado 1"
-                 onerror="this.parentElement.innerHTML='<div class=mp-fallback><div>📰</div><div>COMUNICADO 1</div><div style=font-size:16px;margin-top:10px;>Ministerio Público del Perú</div></div>'">
+                 onerror="this.parentElement.innerHTML='<div class=mp-fallback><div>📰</div><div>COMUNICADO 1</div><div style=font-size:18px;margin-top:5px;>Ministerio Público del Perú</div></div>'">
         </div>
         
         <div class="mp-slide">
             <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/main/fo1.jpeg" 
                  alt="Comunicado 2"
-                 onerror="this.parentElement.innerHTML='<div class=mp-fallback mp-fallback-2><div>📰</div><div>COMUNICADO 2</div><div style=font-size:16px;margin-top:10px;>Ministerio Público del Perú</div></div>'">
+                 onerror="this.parentElement.innerHTML='<div class=\"mp-fallback mp-fallback-2\"><div>📰</div><div>COMUNICADO 2</div><div style=font-size:18px;margin-top:5px;>Ministerio Público del Perú</div></div>'">
         </div>
         
         <div class="mp-slide">
             <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
                  alt="Comunicado 3"
-                 onerror="this.parentElement.innerHTML='<div class=mp-fallback mp-fallback-3><div>📰</div><div>COMUNICADO 3</div><div style=font-size:16px;margin-top:10px;>Ministerio Público del Perú</div></div>'">
+                 onerror="this.parentElement.innerHTML='<div class=\"mp-fallback mp-fallback-3\"><div>📰</div><div>COMUNICADO 3</div><div style=font-size:18px;margin-top:5px;>Ministerio Público del Perú</div></div>'">
         </div>
     </div>
     
-    <!-- Controles de navegación -->
-    <label for="slide3" class="mp-nav mp-nav-prev">‹</label>
-    <label for="slide2" class="mp-nav mp-nav-next">›</label>
+    <!-- Navegación con flechas -->
+    <!-- Desde slide 1: prev va a 3, next va a 2 -->
+    <!-- Desde slide 2: prev va a 1, next va a 3 -->
+    <!-- Desde slide 3: prev va a 2, next va a 1 -->
+    
+    <!-- Flechas Previous -->
+    <label for="slide3" class="mp-nav mp-nav-prev" style="display: none;">‹</label>
+    <label for="slide1" class="mp-nav mp-nav-prev" style="display: none;">‹</label>
+    <label for="slide2" class="mp-nav mp-nav-prev" style="display: none;">‹</label>
+    
+    <!-- Flechas Next -->
+    <label for="slide2" class="mp-nav mp-nav-next" style="display: none;">›</label>
+    <label for="slide3" class="mp-nav mp-nav-next" style="display: none;">›</label>
+    <label for="slide1" class="mp-nav mp-nav-next" style="display: none;">›</label>
     
     <!-- Indicadores -->
     <div class="mp-indicators">
@@ -260,10 +279,37 @@
     </div>
 </div>
 
-<!-- JavaScript mínimo solo para logging (opcional) -->
+<!-- Mostrar flechas según slide activo -->
+<style>
+/* Slide 1 activo: mostrar prev→3 y next→2 */
+.mp-carousel input#slide1:checked ~ label.mp-nav-prev:nth-of-type(4) { display: flex; }
+.mp-carousel input#slide1:checked ~ label.mp-nav-next:nth-of-type(7) { display: flex; }
+
+/* Slide 2 activo: mostrar prev→1 y next→3 */
+.mp-carousel input#slide2:checked ~ label.mp-nav-prev:nth-of-type(5) { display: flex; }
+.mp-carousel input#slide2:checked ~ label.mp-nav-next:nth-of-type(8) { display: flex; }
+
+/* Slide 3 activo: mostrar prev→2 y next→1 */
+.mp-carousel input#slide3:checked ~ label.mp-nav-prev:nth-of-type(6) { display: flex; }
+.mp-carousel input#slide3:checked ~ label.mp-nav-next:nth-of-type(9) { display: flex; }
+</style>
+
 <script>
-console.log('✅ Carrusel CSS puro cargado');
-console.log('🎮 Controles: Haz clic en flechas, círculos o espera el auto-slide');
-console.log('⏭️ Auto-slide: Cambia cada 6 segundos automáticamente');
+console.log('✅ Carrusel CSS mejorado cargado');
+console.log('🎮 Controles:');
+console.log('  • Flechas: ← → navegan entre slides');
+console.log('  • Círculos: Clic directo a slide específico');
+console.log('  • Auto-slide: Cambia cada 8 segundos');
+console.log('  • Indicadores activos: Brillan en blanco');
 console.log('🔗 Saltar Intro: Va al sitio principal');
+
+// Test de elementos
+setTimeout(function() {
+    const slide1 = document.getElementById('slide1');
+    const indicators = document.querySelectorAll('.mp-indicator');
+    console.log('📊 Elementos detectados:');
+    console.log('  • Radio slide1:', slide1 ? '✅' : '❌');
+    console.log('  • Indicadores:', indicators.length);
+    console.log('  • Slide1 checked:', slide1 ? slide1.checked : 'N/A');
+}, 1000);
 </script>
