@@ -63,6 +63,7 @@
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
             z-index: 100;
+            cursor: pointer;
         }
 
         .skip-intro-btn:hover {
@@ -225,27 +226,28 @@
 </head>
 <body>
     <div class="carousel-container">
-        <!-- Botón Saltar Intro - CAMBIA ESTA URL -->
-        <a href="https://sites.google.com/view/TU-SITIO-AQUI" class="skip-intro-btn">Saltar Intro</a>
+        <!-- Botón Saltar Intro - PON TU URL REAL AQUÍ -->
+        <button class="skip-intro-btn" onclick="goToMainSite()">Saltar Intro</button>
 
         <!-- Contador de slides -->
         <div class="slide-counter">
             <span id="currentSlide">1</span> / <span id="totalSlides">2</span>
         </div>
 
-        <!-- Slide 1: REEMPLAZA CON TU URL DE GITHUB -->
+        <!-- Slide 1 -->
         <div class="carousel-slide active">
             <img src="https://raw.githubusercontent.com/informaticafecor/imagenes_noticias/refs/heads/main/WhatsApp%20Image%202025-06-10%20at%205.25.45%20PM.jpeg" 
-    
+                 alt="Comunicado 1" class="slide-image"
                  onload="this.style.display='block'"
-                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner>'">
+                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen</div>'">
         </div>
 
-        <!-- Slide 2: REEMPLAZA CON TU URL DE GITHUB -->
+        <!-- Slide 2 -->
         <div class="carousel-slide">
             <img src="https://raw.githubusercontent.com/informaticafecor/iniciosite/refs/heads/main/fo1.jpeg" 
+                 alt="Comunicado 2" class="slide-image"
                  onload="this.style.display='block'"
-                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner>'">
+                 onerror="this.parentElement.innerHTML='<div class=loading-placeholder><div class=loading-spinner></div>Error cargando imagen</div>'">
         </div>
 
         <!-- Flechas de navegación -->
@@ -264,11 +266,22 @@
         const totalSlides = 2;
         let autoSlideInterval;
 
-        // Mostrar indicadores de carga iniciales
-        document.querySelectorAll('.slide-image').forEach(img => {
-            img.style.display = 'none';
-            img.parentElement.innerHTML += '<div class="loading-placeholder"><div class="loading-spinner"></div>Cargando imagen...</div>';
-        });
+        // ✅ AQUÍ PON LA URL REAL DE TU GOOGLE SITES
+        // Por ejemplo: 'https://sites.google.com/view/ministerio-publico'
+        const MAIN_SITE_URL = 'CAMBIA-ESTA-URL-POR-TU-GOOGLE-SITES';
+
+        function goToMainSite() {
+            // Verificar si la URL fue cambiada
+            if (MAIN_SITE_URL === 'CAMBIA-ESTA-URL-POR-TU-GOOGLE-SITES') {
+                alert('⚠️ IMPORTANTE: Debes cambiar MAIN_SITE_URL en el código por la URL real de tu Google Sites');
+                console.error('❌ URL no configurada. Busca "MAIN_SITE_URL" en el código y cámbiala.');
+                return;
+            }
+            
+            // Redirigir en la misma pestaña
+            console.log('🔄 Redirigiendo a:', MAIN_SITE_URL);
+            window.location.href = MAIN_SITE_URL;
+        }
 
         document.getElementById('totalSlides').textContent = totalSlides;
 
@@ -333,14 +346,18 @@
             if (e.key === 'ArrowLeft') previousSlide();
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'Escape') {
-                window.location.href = 'https://sites.google.com/view/TU-SITIO-AQUI';
+                goToMainSite(); // Usar la misma función
             }
         });
 
-        // Log para debugging
+        // Log de inicio
         console.log('🚀 Carrusel iniciado');
-        console.log('📁 Recuerda usar URLs RAW de GitHub');
-        console.log('🔗 Formato: https://raw.githubusercontent.com/USUARIO/REPO/main/imagen.jpg');
+        console.log('🔗 URL configurada:', MAIN_SITE_URL);
+        
+        // Verificar configuración
+        if (MAIN_SITE_URL === 'https://sites.google.com/d/1Vld4JD6BtniM1g9RnkWx96oe1ocplssY/p/1eAf_aW-O2zVw97brn_T-lhkECZ-WiZ0T/edit') {
+            console.warn('⚠️ Recuerda cambiar MAIN_SITE_URL por tu URL real');
+        }
     </script>
 </body>
 </html>
